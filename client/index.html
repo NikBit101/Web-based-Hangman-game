@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<link rel="icon" type="image/png" href="favicon-32x32.png">
+<link rel="stylesheet" href="style.css">
+<meta name="viewport" content="width=device-width, initial-scale=0.5">
+<script src="index.mjs" type="module"></script>
+<title>Hangman Game</title>
+<h1>HANGMAN</h1>
+
+<section id="game">
+    
+    <canvas></canvas>
+    
+    <p id="hiddenWord">Word:</p>
+    
+    <div class="inputTypes"> Your letter: 
+        <input type="text" id="inputBox" placeholder="..." maxlength="1">
+        <button id="checkButton">CHECK</button>
+    </div>
+    
+    <p id="warningMsg"></p>
+    
+    <p id="category">*testing*</p>
+
+    <p id="lifeCount">Lives: </p>
+    <p id="scoreCount">Score: </p>
+
+    <p id="usedLetters">Used letters: </p>
+
+    <p id="errorMsg"></p>
+
+</section>
