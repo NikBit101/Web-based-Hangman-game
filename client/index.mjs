@@ -5,6 +5,7 @@ import { generateRandomNumber } from './generateRandomNumber.mjs';
 import { hideWord } from './hideWord.mjs';
 import { drawBackground, clearCanvas } from './drawCanvas.mjs';
 import { lifeCount } from './lifeCount.mjs';
+import { displayHiddenWord } from './displayHiddenWord.mjs';
 import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
 
@@ -17,11 +18,6 @@ let letterFound;
 let condition;
 let lives;
 let score;
-
-function displayHiddenWord() {
-    handles.word.textContent = '';
-    handles.word.textContent = `Word: ${hiddenWord.join(' ')}`;
-}
 
 function displayCategory(category) {
     handles.category.textContent = `Category: ${category}`;
@@ -47,7 +43,7 @@ async function generateRandomWord() {
 
         // display outputs taken from server
         displayCategory(randomCategory);
-        displayHiddenWord(randomWord);
+        displayHiddenWord(hiddenWord);
     } else {
         handles.errorMsg.textContent = `Word failed to load`;
     }

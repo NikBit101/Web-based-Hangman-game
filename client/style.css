@@ -103,8 +103,8 @@ canvas {
 #errorMsg {
     font-family: Arial, Helvetica, sans-serif;
     position: absolute;
-    left: 21.6em;
-    top: 6.4em;
+    left: 27em;
+    top: 1em;
     color: red;
     font-size: 130%;
 }
