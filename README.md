@@ -4,4 +4,8 @@
 
 # pushed to github
 
-# testing button pushing
+# [TESTING] button pushing
+
+# [2] ditched the idea of 'inputbox',
+# added letters as buttons instead,
+# improved the design of the game to make the UI appeal better.
