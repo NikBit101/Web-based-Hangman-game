@@ -12,6 +12,7 @@ export function prepareHandles() {
     preparedHandles.lifeCount = document.querySelector('#lifeCount');
     preparedHandles.usedLetters = document.querySelector('#usedLetters');
     preparedHandles.score = document.querySelector('#scoreCount');
+    preparedHandles.letterButton = document.querySelectorAll('.letterButton');
 
     return preparedHandles;
 }
