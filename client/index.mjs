@@ -17,7 +17,8 @@ let hiddenWord;
 let letterFound;
 let condition;
 let lives;
-let score;
+let scoreWins;
+let scoreLosses;
 
 function displayCategory(category) {
     handles.category.textContent = `Category: ${category}`;
@@ -87,6 +88,7 @@ function restartPage(theClass, prompting) {
     letterFound = false;
     condition = false;
     handles.warningMsg.textContent = '';
+    handles.usedLetters.textContent = 'Used Letters: ';
     handles.warningMsg.style.color = 'Red';
 
     enable.enableButton();
@@ -350,7 +352,8 @@ async function displayScore() {
     const response = await fetch('score');
     if(response.ok) {
         let sCount = await response.json();
-        score = sCount.score;
+        scoreWins = sCount.wins;
+        scoreLosses = sCount.losses;
     } else {
         score = ['*Could not load the score :-(*'];
     }

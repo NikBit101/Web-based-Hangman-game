@@ -1,7 +1,6 @@
 "use strict"
 
 import { prepareWord } from './prepareWord.mjs';
-import { lifeCount } from './setLife.mjs';
 import { scoreCount } from './scoreCount.mjs';
 import express from 'express';
 
@@ -15,19 +14,23 @@ const categories = prepareWord();
 // store score count
 
 function getCategory(req, res) {
+    console.log(`Random category: ${categories}`);
     res.json(categories);
 }
 
 function getLives(req, res) {
-    res.json(lifeCount);
+    console.log(`Life count: ${scoreCount.lives}`);
+    res.json(scoreCount);
 }
 
 function getScore(req, res) {
+    console.log(`Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`);
     res.json(scoreCount);
 }
 
 function sendScore(req, res) {
     const payloadPOST = req.body.score;
+    console.log(`Sent score: ${payloadPOST}`);
     scoreCount.score = payloadPOST;
     // send back the information about the new score to the request
     res.json(scoreCount);

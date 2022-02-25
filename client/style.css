@@ -4,6 +4,7 @@ body {
     height: 100%;
     width: 100%;
     overflow: hidden;
+    font-family: 'Courier New', Courier, monospace;
 }
 h1 {
     position: relative;
@@ -21,11 +22,11 @@ section {
     background-color: #D5F5E3;
     text-align: center;
     height: 20em;
-    left: 35em;
+    left: 25em;
     margin: 1.5em;
-    width: 55em;
+    width: 66em;
     font-family: 'Courier New', Courier, monospace;
-    border: 6px dashed #5e5eee;
+    border: 6px solid #5e5eee;
 }
 #letterButtons {
     position: absolute;
@@ -34,17 +35,23 @@ section {
     text-align: center;
     height: 17.9em;
     top: 26em;
-    left: 28em;
-    border: 6px solid #DFFF00;
+    left: 26.6em;
+}
+#yourword{
+    position: absolute;
+    font-size: 3em;
+    top: -0.8em;
+    left: 12.5em;
 }
 #hiddenWord {
     max-width: 100%;
     position: absolute;
-    left: 9em;
+    left: 18em;
     text-transform: uppercase;
+    top: 1.5em;
     padding: 0.5em;
     margin: 0.5em;
-    font-size: 200%;
+    font-size: 2em;
 }
 canvas {
     background-color: white;
@@ -58,8 +65,8 @@ canvas {
     text-transform: uppercase;
     background-color: #CCCCFF;
     position: absolute;
-    top: 2em;
-    left: 10em;
+    top: 4em;
+    left: 19em;
     font-size: 2em;
     text-align: left;
 }
@@ -79,6 +86,7 @@ canvas {
     margin-bottom: 1rem;
 }
 #checkButton {
+    font-family: 'Courier New', Courier, monospace;
     background-color: #821f68;
     color: white;
     border: none;
@@ -102,15 +110,14 @@ canvas {
 }
 #warningMsg{
     position: absolute;
-    left: 12em;
-    top: 5.5em;
+    max-width: 30%;
+    left: 10em;
+    top: 0em;
     background-color: black;
     color: red;
     font-size: 1.7em;
-    font-family: Arial, Helvetica, sans-serif;
 }
 #errorMsg {
-    font-family: Arial, Helvetica, sans-serif;
     position: absolute;
     left: 12em;
     top: 5em;
@@ -153,10 +160,12 @@ canvas {
     text-transform: uppercase;
     background-color: rgb(240, 116, 116);
     font-size: 3em;
-    left: 0;
+    top: 2em;
+    left: 5.5em;
     border: 1px solid black;
 }
 .letterButton{
+    font-family: 'Courier New', Courier, monospace;
     height: 2em;
     font-size: 2.8em;
     margin: 2px;
