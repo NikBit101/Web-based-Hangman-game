@@ -54,16 +54,26 @@ async function generateRandomWord() {
 async function getRandomWord() {
     const response = await fetch('word');
     if(response.ok) {
-
+        const fetchedWord = await response.json();
+        console.log(` - [CLIENT] Fetched word: ${fetchedWord}`);
+        hiddenWord = hideWord(fetchedWord);
+        displayHiddenWord(hiddenWord);
     } else {
 
     }
 }
 
+function showCategory(category) {
+    displayCategory(category);
+}
+
 async function getRandomCategory() {
     const response = await fetch('categories');
     if(response.ok) {
-        console.log(`Fetched word: ${response.json()}`)
+        const fetchedCategory = await response.json();
+        console.log(` - [CLIENT] Fetched category: ${fetchedCategory}`);
+        // display outputs taken from server
+        showCategory(fetchedCategory);
     } else {
         
     }

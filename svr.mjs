@@ -11,9 +11,10 @@ app.use(express.static('client'));
 // prepare a random word based on categories
 // store it on a server here
 const categories = prepareWord();
-const randomCategory = generateRandomCategory(categories);
+let randomCategory;
 
 function getCategory(req, res) {
+    randomCategory = generateRandomCategory(categories);
     console.log(` - [SERVER] Random category: ${randomCategory}`);
     res.json(randomCategory);
 }
