@@ -7,6 +7,7 @@ import { lifeCount } from './lifeCount.mjs';
 import { hideWord } from './hideWord.mjs';
 import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
+//import { scoreCount } from '../scoreCount.mjs';
 
 let handles = {};
 let randomCategory;
@@ -23,39 +24,10 @@ function displayCategory(category) {
     handles.category.textContent = `Category: ${category}`;
 }
 
-/* this is where a random category with a word is fetched from the server,
-// stored here
-async function generateRandomWord() {
-    const response = await fetch('categories');
-    if (response.ok) {
-        const categoryResponse = await response.json();
-        
-        // generate random indexes, one for 'categoryList', another for 'randomWord'
-        const categoryList = Object.values(categoryResponse); 
-        const randomCategoryIndex = generateRandomNumber(categoryList);
-        const rCategory = categoryList[randomCategoryIndex];
-        const rWord = generateRandomNumber(rCategory);
-
-        // assign category and word to return their values
-        const category = Object.keys(categoryResponse)[randomCategoryIndex];
-        const word = rCategory[rWord];
-        randomCategory = category.toString();
-        randomWord = word;
-        hiddenWord = hideWord(randomWord);
-
-        // display outputs taken from server
-        displayCategory(randomCategory);
-        displayHiddenWord(hiddenWord);
-    } else {
-        handles.errorMsg.textContent = `Word failed to load`;
-    }
-}*/
-
 async function getRandomWord() {
     const response = await fetch('word');
     if(response.ok) {
         const fetchedWord = await response.json();
-        console.log(` - [CLIENT] Fetched word: ${fetchedWord}`);
         randomWord = fetchedWord;
         hiddenWord = hideWord(fetchedWord);
         displayHiddenWord(hiddenWord);
@@ -70,7 +42,6 @@ async function getRandomCategory() {
     const response = await fetch('categories');
     if(response.ok) {
         const fetchedCategory = await response.json();
-        console.log(` - [CLIENT] Fetched category: ${fetchedCategory}`);
         // display outputs taken from server
         randomCategory = fetchedCategory;
         displayCategory(fetchedCategory);
@@ -83,8 +54,8 @@ async function getRandomCategory() {
 }
 
 // send to server the current score, thereby updating it
-async function setScore(scr) {
-    const payload = { score: scr };
+async function setScore(scrW, scrL) {
+    const payload = { wins: scrW, losses: scrL };
     const response = await fetch('score', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -92,9 +63,12 @@ async function setScore(scr) {
     });
     if(response.ok) {
         let scoreCount = await response.json();
-        handles.score.textContent = `Score: ${scoreCount.score}`;
+        scoreCount.wins = scoreWins;
+        scoreCount.losses = scoreLosses;
+        handles.scoreCount.textContent = `Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`;
     } else {
-        score = ['*Could not load new score :-(*'];
+        handles.scoreCount.textContent = ['*Could not load new score :-(*'];
+        throw new Error(`[${response.status}] connection failed`);
     }
 }
 
@@ -130,6 +104,8 @@ function restartPage(theClass, prompting) {
 
     clearCanvas();
     drawBackground();
+    getRandomCategory();
+    getRandomWord();
     setLife();
     displayScore();
 }
@@ -192,14 +168,14 @@ function gameStop(condition) {
     if (condition) {
         disable.disableButton();
         displayMessage(condition, randomWord);
-        score +=1;
-        setScore(score);
+        scoreWins +=1;
+        setScore(scoreWins, scoreLosses);
         restartPrompt();
     } else {
         disable.disableButton();
         displayMessage(condition, randomWord);
-        score -=1;
-        setScore(score);
+        scoreLosses +=1;
+        setScore(scoreWins, scoreLosses);
         restartPrompt();
     }
 }
@@ -216,7 +192,7 @@ function monitorLife(lCount) {
         condition = true;
         gameStop(condition);
     }
-    handles.score.textContent = `Score: ${score}`;
+    handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
 }
 
 // The function will check the letter input to compare it with the word
@@ -384,9 +360,9 @@ async function displayScore() {
         scoreWins = sCount.wins;
         scoreLosses = sCount.losses;
     } else {
-        score = ['*Could not load the score :-(*'];
+        scoreWins = ['*Could not load wins/losses :-(*'];
     }
-    handles.score.textContent = `Score: ${score}`;
+    handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
 }
 
 // get the life count from server and display here

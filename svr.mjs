@@ -36,9 +36,11 @@ function getScore(req, res) {
 }
 
 function sendScore(req, res) {
-    const payloadPOST = req.body.score;
-    console.log(`Sent score: ${payloadPOST}`);
-    scoreCount.score = payloadPOST;
+    const payloadPOSTWins = req.body.wins;
+    const payloadPOSTLosses = req.body.losses;
+    console.log(`Sent score: ${payloadPOSTWins}, ${payloadPOSTLosses}`);
+    scoreCount.wins = payloadPOSTWins;
+    scoreCount.losses = payloadPOSTLosses;
     // send back the information about the new score to the request
     res.json(scoreCount);
 }

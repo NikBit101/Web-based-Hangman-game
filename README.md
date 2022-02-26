@@ -14,3 +14,5 @@
 # allowing the user to use both the keyboard and buttons to choose their letter.
 
 # [4] Generating randoms moved from client to server
+
+# [5] Improved the wins/losses grabbed from server and set on client
