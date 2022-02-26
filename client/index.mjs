@@ -56,10 +56,13 @@ async function getRandomWord() {
     if(response.ok) {
         const fetchedWord = await response.json();
         console.log(` - [CLIENT] Fetched word: ${fetchedWord}`);
+        randomWord = fetchedWord;
         hiddenWord = hideWord(fetchedWord);
         displayHiddenWord(hiddenWord);
+        return;
     } else {
-
+        handles.errorMsg.textContent = `Word failed to load`;
+        throw new Error(`[${response.status}] connection failed`);
     }
 }
 
@@ -69,9 +72,12 @@ async function getRandomCategory() {
         const fetchedCategory = await response.json();
         console.log(` - [CLIENT] Fetched category: ${fetchedCategory}`);
         // display outputs taken from server
+        randomCategory = fetchedCategory;
         displayCategory(fetchedCategory);
+        return;
     } else {
-        
+        handles.errorMsg.textContent = `Category failed to load`;
+        throw new Error(`[${response.status}] connection failed`);
     }
 
 }

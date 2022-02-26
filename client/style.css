@@ -119,10 +119,10 @@ canvas {
 }
 #errorMsg {
     position: absolute;
-    left: 12em;
-    top: 5em;
+    left: 10em;
+    top: 3.5em;
     color: red;
-    font-size: 130%;
+    font-size: 3em;
 }
 #lifeCount{
     position: absolute;
