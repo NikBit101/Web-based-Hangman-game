@@ -63,17 +63,13 @@ async function getRandomWord() {
     }
 }
 
-function showCategory(category) {
-    displayCategory(category);
-}
-
 async function getRandomCategory() {
     const response = await fetch('categories');
     if(response.ok) {
         const fetchedCategory = await response.json();
         console.log(` - [CLIENT] Fetched category: ${fetchedCategory}`);
         // display outputs taken from server
-        showCategory(fetchedCategory);
+        displayCategory(fetchedCategory);
     } else {
         
     }

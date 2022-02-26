@@ -1,6 +1,6 @@
 "use strict"
 
-import { prepareWord } from './prepareWord.mjs';
+import { prepareCategory } from './prepareCategory.mjs';
 import { scoreCount } from './scoreCount.mjs';
 import { generateRandomCategory, generateRandomWord } from './generateRandomCatWords.mjs';
 import express from 'express';
@@ -10,7 +10,7 @@ app.use(express.static('client'));
 
 // prepare a random word based on categories
 // store it on a server here
-const categories = prepareWord();
+const categories = prepareCategory();
 let randomCategory;
 
 function getCategory(req, res) {
