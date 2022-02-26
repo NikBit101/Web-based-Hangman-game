@@ -2,6 +2,7 @@
 
 import { prepareWord } from './prepareWord.mjs';
 import { scoreCount } from './scoreCount.mjs';
+import { generateRandomCategory, generateRandomWord } from './generateRandomCatWords.mjs';
 import express from 'express';
 
 const app = express();
@@ -10,21 +11,26 @@ app.use(express.static('client'));
 // prepare a random word based on categories
 // store it on a server here
 const categories = prepareWord();
-
-// store score count
+const randomCategory = generateRandomCategory(categories);
 
 function getCategory(req, res) {
-    console.log(`Random category: ${categories}`);
-    res.json(categories);
+    console.log(` - [SERVER] Random category: ${randomCategory}`);
+    res.json(randomCategory);
+}
+
+function getWord(req, res) {
+    const randomWord = generateRandomWord(categories, randomCategory);
+    console.log(` - [SERVER] Random word: ${randomWord}`);
+    res.json(randomWord);
 }
 
 function getLives(req, res) {
-    console.log(`Life count: ${scoreCount.lives}`);
+    console.log(`___\n - [SERVER] Life count: ${scoreCount.lives}`);
     res.json(scoreCount);
 }
 
 function getScore(req, res) {
-    console.log(`Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`);
+    console.log(` - [SERVER] Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}\n___`);
     res.json(scoreCount);
 }
 
@@ -38,6 +44,7 @@ function sendScore(req, res) {
 
 // get information from the server
 app.get('/categories', getCategory);
+app.get('/word', getWord);
 app.get('/lifeCount', getLives);
 app.get('/score', getScore);
 

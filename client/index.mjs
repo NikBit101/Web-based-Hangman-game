@@ -1,11 +1,10 @@
 "use strict"
 
-import { prepareHandles } from './prepareHandles.mjs';
-import { generateRandomNumber } from './generateRandomNumber.mjs';
-import { hideWord } from './hideWord.mjs';
 import { drawBackground, clearCanvas } from './drawCanvas.mjs';
-import { lifeCount } from './lifeCount.mjs';
 import { displayHiddenWord } from './displayHiddenWord.mjs';
+import { prepareHandles } from './prepareHandles.mjs';
+import { lifeCount } from './lifeCount.mjs';
+import { hideWord } from './hideWord.mjs';
 import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
 
@@ -24,7 +23,7 @@ function displayCategory(category) {
     handles.category.textContent = `Category: ${category}`;
 }
 
-// this is where a random category with a word is fetched from the server,
+/* this is where a random category with a word is fetched from the server,
 // stored here
 async function generateRandomWord() {
     const response = await fetch('categories');
@@ -50,6 +49,25 @@ async function generateRandomWord() {
     } else {
         handles.errorMsg.textContent = `Word failed to load`;
     }
+}*/
+
+async function getRandomWord() {
+    const response = await fetch('word');
+    if(response.ok) {
+
+    } else {
+
+    }
+}
+
+async function getRandomCategory() {
+    const response = await fetch('categories');
+    if(response.ok) {
+        console.log(`Fetched word: ${response.json()}`)
+    } else {
+        
+    }
+
 }
 
 // send to server the current score, thereby updating it
@@ -100,7 +118,6 @@ function restartPage(theClass, prompting) {
 
     clearCanvas();
     drawBackground();
-    generateRandomWord();
     setLife();
     displayScore();
 }
@@ -385,8 +402,9 @@ function prepareHandle() {
 function pageLoaded() {
     prepareHandle();
     addEventListeners();
-    generateRandomWord();
     setLife();
+    getRandomCategory();
+    getRandomWord();
     displayScore();
     drawBackground();
 }
