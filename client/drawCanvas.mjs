@@ -105,7 +105,7 @@ export function drawRope() {
     ctx.stroke();
 }
 
-export function drawStickman() {
+export function drawStickHead() {
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
     const halfWidth = canvas.width / 2;
@@ -118,6 +118,15 @@ export function drawStickman() {
     ctx.arc((halfWidth + 30), (halfHeight - 20), 10, 0, Math.PI*2, false);
     ctx.stroke();
     ctx.closePath();
+}
+
+export function drawStickBody() {
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const halfWidth = canvas.width / 2;
+    const halfHeight = canvas.height / 2;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'black';
     
     // body stick
     ctx.beginPath();
@@ -125,6 +134,15 @@ export function drawStickman() {
     ctx.lineTo((halfWidth + 30), (halfHeight + 40));
     ctx.stroke();
     ctx.closePath();
+}
+
+export function drawStickArms() {
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const halfWidth = canvas.width / 2;
+    const halfHeight = canvas.height / 2;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'black';
 
     // arms
     // left
@@ -140,7 +158,15 @@ export function drawStickman() {
     ctx.lineTo((halfWidth + 50), (halfHeight + 20));
     ctx.stroke();
     ctx.closePath();
-    
+}
+
+export function drawStickLegs() {
+    const canvas = document.querySelector('canvas');
+    const ctx = canvas.getContext('2d');
+    const halfWidth = canvas.width / 2;
+    const halfHeight = canvas.height / 2;
+    ctx.lineWidth = 5;
+    ctx.strokeStyle = 'black';
     
     // legs
     // left

@@ -91,6 +91,7 @@ function restartPage(theClass, prompting) {
     hiddenWord = '';
     letterFound = false;
     condition = false;
+    handles.letter.value = '';
     handles.warningMsg.textContent = '';
     handles.usedLetters.textContent = 'Used Letters: ';
     handles.warningMsg.style.color = 'Red';
@@ -228,7 +229,7 @@ function letterCheck(who) {
     monitorLife(lives);
     letterFound = false;
     usedLetters.push(letter);
-    handles.letter.value = '';
+    //handles.letter.value = '';
     handles.lifeCount.textContent = `Lives: ${lives}`;
     usedLetterstxt.textContent = `Used letters: ${usedLetters}`;
 }
@@ -252,6 +253,7 @@ function whatClicked(e) {
         const button = handles.letterButton[i];
         if(e.target === button) {
             handles.letter.value = button.textContent;
+            letterCheck(button.textContent);
             return;            
         }
     }
