@@ -12,3 +12,5 @@
 
 # [3] Made functionality of the letter-buttons on screen,
 # allowing the user to use both the keyboard and buttons to choose their letter.
+
+# [4] Generating randoms moved from client to server
