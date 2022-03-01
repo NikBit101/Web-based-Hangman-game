@@ -97,6 +97,7 @@ function restartPage(theClass, prompting) {
 
     enable.enableTextInput();
     enable.enableButton();
+    enable.enable
     
     if (prompting) {
         handles.gameSection.removeChild(theClass);
