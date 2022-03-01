@@ -1,7 +1,7 @@
 import * as drawCanvas from "./drawCanvas.mjs";
 
-export function lifeCount(lives) {
-    switch (lives) {
+export function guessCount(guesses) {
+    switch (guesses) {
         case 7:
             drawCanvas.drawSmallSticks();
             break;

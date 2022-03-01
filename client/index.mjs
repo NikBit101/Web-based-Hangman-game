@@ -2,12 +2,15 @@
 
 import { drawBackground, clearCanvas } from './drawCanvas.mjs';
 import { displayHiddenWord } from './displayHiddenWord.mjs';
+import { displayCategory } from './displayCategory.mjs';
+import { displayMessage } from './displayMessage.mjs';
 import { prepareHandles } from './prepareHandles.mjs';
-import { lifeCount } from './lifeCount.mjs';
+import { createPrompt } from './createPrompt.mjs';
+import { whatClicked } from './mouseClickCheck.mjs';
+import { guessCount } from './guessCount.mjs';
 import { hideWord } from './hideWord.mjs';
 import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
-//import { scoreCount } from '../scoreCount.mjs';
 
 let handles = {};
 let randomCategory;
@@ -16,13 +19,9 @@ let usedLetters = [];
 let hiddenWord;
 let letterFound;
 let condition;
-let lives;
+let guesses;
 let scoreWins;
 let scoreLosses;
-
-function displayCategory(category) {
-    handles.category.textContent = `Category: ${category}`;
-}
 
 async function getRandomWord() {
     const response = await fetch('word');
@@ -72,16 +71,6 @@ async function setScore(scrW, scrL) {
     }
 }
 
-// display a condition message
-function displayMessage(condition, rWord) {
-    handles.warningMsg.textContent = condition === true ? 'You win! +1 point' : `The word was '${rWord.toUpperCase()}'`;
-    if (condition) {
-        handles.warningMsg.style.color = 'Lime';
-    } else {
-        handles.warningMsg.style.color = 'Red';
-    }
-}
-
 // when the page is restarted, all the required variables will be reset,
 // canvas will be redrawn.
 function restartPage(theClass, prompting) {
@@ -97,6 +86,7 @@ function restartPage(theClass, prompting) {
     handles.warningMsg.style.color = 'Red';
 
     enable.enableButton();
+    enable.enableKeyButtons();
     
     if (prompting) {
         handles.gameSection.removeChild(theClass);
@@ -107,16 +97,8 @@ function restartPage(theClass, prompting) {
     drawBackground();
     getRandomCategory();
     getRandomWord();
-    setLife();
+    setGuessCount();
     displayScore();
-}
-
-// the 'Play Again?' dialog will be created here
-function createPrompt() {
-    // create HTML tags
-    const restartPrompt = document.createElement('p');
-    restartPrompt.setAttribute('id', 'restartPrompt');
-    return restartPrompt;
 }
 
 // create restart prompt box here
@@ -165,39 +147,41 @@ function restartPrompt() {
 // The function stops the game process, 
 // disables inputs, 
 // creates a prompt for user to restart or leave the game.
-function gameStop(condition) {
+function gameStop(condition, rWord, sWins, sLosses) {
+    disable.disableButton();
+    disable.disableKeyButtons();
+
     if (condition) {
-        disable.disableButton();
-        displayMessage(condition, randomWord);
-        scoreWins +=1;
-        setScore(scoreWins, scoreLosses);
-        restartPrompt();
+        displayMessage(condition, rWord);
+        sWins +=1;
     } else {
-        disable.disableButton();
-        displayMessage(condition, randomWord);
-        scoreLosses +=1;
-        setScore(scoreWins, scoreLosses);
-        restartPrompt();
+        displayMessage(condition, rWord);
+        sLosses +=1;
     }
+    
+    setScore(sWins, sLosses);
+    restartPrompt();
 }
 
-// The function will monitor the life count.
-// It accepts 'lives' as 'lCount' (which is an int or number)
+// The function will monitor the guess count.
+// It accepts 'guess' as 'gCount' (which is an int or number)
 // it stops the game and sends true/false condition after checking whether the player won or lost
-function monitorLife(lCount) {
-    lifeCount(lCount);
-    if(lCount === 0) {
+function monitorGuess(gCount, rWord, scoreW, scoreL) {
+    guessCount(gCount);
+
+    if(gCount === 0) {
         condition = false;
-        gameStop(condition);
-    } else if (hiddenWord.join('') === randomWord && lCount > 0){
+        gameStop(condition, rWord, scoreW, scoreL);
+    } else if (hiddenWord.join('') === randomWord && gCount > 0){
         condition = true;
-        gameStop(condition);
+        gameStop(condition, rWord, scoreW, scoreL);
     }
-    handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
+
+    handles.scoreCount.textContent = `Wins: ${scoreW}\nLosses: ${scoreL}`;
 }
 
 // The function will check the letter input to compare it with the word
-function letterCheck(who) {
+export function letterCheck(who) {
     const letter = who.toLowerCase();
     const usedLetterstxt = handles.usedLetters;
 
@@ -223,14 +207,14 @@ function letterCheck(who) {
         } else if (i+1 === randomWord.length && !letterFound){
             // letter does not exist in the word
             handles.warningMsg.textContent = `The letter '${letter}' does not exist in the word`;
-            lives -=1;
+            guesses -=1;
         }
     }
-    monitorLife(lives);
+    monitorGuess(guesses, randomWord, scoreWins, scoreLosses);
     letterFound = false;
     usedLetters.push(letter);
     //handles.letter.value = '';
-    handles.lifeCount.textContent = `Lives: ${lives}`;
+    handles.guessCount.textContent = `Guesses left: ${guesses}`;
     usedLetterstxt.textContent = `Used letters: ${usedLetters}`;
 }
 
@@ -247,21 +231,9 @@ function validateInput() {
     letterCheck(letter);
 }
 
-// what button was clicked by the mouse
-function whatClicked(e) {
-    for(let i = 0; i < handles.letterButton.length; i+=1) {
-        const button = handles.letterButton[i];
-        if(e.target === button) {
-            handles.letter.value = button.textContent;
-            letterCheck(button.textContent);
-            return;            
-        }
-    }
-}
-
 // check the keys that were pressed by the user on keyboard
 function checkKeys(e) {
-    if(lives > 0) {
+    if(guesses > 0) {
         switch(e.key.toLowerCase()) {
             // first row
             case "enter":
@@ -367,16 +339,16 @@ async function displayScore() {
     handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
 }
 
-// get the life count from server and display here
-async function setLife() {
-    const response = await fetch('lifeCount');
+// get the guess count from server and display here
+async function setGuessCount() {
+    const response = await fetch('guessCount');
     if (response.ok) {
         let lCount = await response.json();
-        lives = lCount.lives;
+        guesses = lCount.guesses;
     } else {
-        lives = [' *Could not load lives* '];
+        guesses = [' *Could not load guesses* '];
     }
-    handles.lifeCount.textContent = `Lives: ${lives}`;
+    handles.guessCount.textContent = `Guesses left: ${guesses}`;
 }
 
 function addEventListeners() {
@@ -392,7 +364,7 @@ function prepareHandle() {
 function pageLoaded() {
     prepareHandle();
     addEventListeners();
-    setLife();
+    setGuessCount();
     getRandomCategory();
     getRandomWord();
     displayScore();

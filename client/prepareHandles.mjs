@@ -9,10 +9,10 @@ export function prepareHandles() {
     preparedHandles.category = document.querySelector('#category');
     preparedHandles.warningMsg = document.querySelector('#warningMsg');
     preparedHandles.errorMsg = document.querySelector('#errorMsg');
-    preparedHandles.lifeCount = document.querySelector('#lifeCount');
+    preparedHandles.guessCount = document.querySelector('#guessCount');
     preparedHandles.usedLetters = document.querySelector('#usedLetters');
     preparedHandles.scoreCount = document.querySelector('#scoreCount');
-    preparedHandles.letterButton = document.querySelectorAll('.letterButton');
+    preparedHandles.letterKey = document.querySelectorAll('.key');
 
     return preparedHandles;
 }

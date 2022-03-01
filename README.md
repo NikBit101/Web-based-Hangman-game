@@ -16,3 +16,11 @@
 # [4] Generating randoms moved from client to server
 
 # [5] Improved the wins/losses grabbed from server and set on client
+
+# [6]
+# - Added the flexbox style,
+# - Improved the UI,
+# - Changed 'lives' variables to 'guesses',
+# - Modularised 'mouseClickCheck.mjs', 'disable/enable~Inputs.mjs', 'displayMessage.mjs', 'createPrompt.mjs'
+# - Added a category 'lecturers',
+# - Changed canvas properties,

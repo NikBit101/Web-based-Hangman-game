@@ -25,8 +25,8 @@ function getWord(req, res) {
     res.json(randomWord);
 }
 
-function getLives(req, res) {
-    console.log(`___\n - [SERVER] Life count: ${scoreCount.lives}`);
+function getGuesses(req, res) {
+    console.log(`___\n - [SERVER] Guess count: ${scoreCount.guesses}`);
     res.json(scoreCount);
 }
 
@@ -48,7 +48,7 @@ function sendScore(req, res) {
 // get information from the server
 app.get('/categories', getCategory);
 app.get('/word', getWord);
-app.get('/lifeCount', getLives);
+app.get('/guessCount', getGuesses);
 app.get('/score', getScore);
 
 // send information to the server

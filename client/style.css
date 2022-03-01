@@ -1,174 +1,214 @@
+:root{
+    --main-col: #5e5eee;
+    --main-font: 'Courier New', Courier, monospace;
+    --org-fSize: 2em;
+    --maxWidth: 100%;
+}
+
+@media screen and (max-width: 900px) {
+    *  main {
+    grid-template-rows: 4em 1fr 1fr 1fr;
+
+    grid-template-areas: "h1 h1 h1"
+    "game game game"
+    "canvas canvas canvas"
+    "keyboard keyboard keyboard";
+    }
+
+    #head {
+    font-size: 3.2vw;
+    }
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--main-font);
+    max-width: var(--maxWidth);
+}
+
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 4em 1fr 1fr;
+
+    grid-template-areas: "head head head"
+      "canvas game game"
+      "canvas keyboard keyboard";
+
+    height: 100vh;
+    width: 100vw;
+}
+
 body {
     background-color: rgb(33, 143, 194);
     margin: 0;
     height: 100%;
     width: 100%;
     overflow: hidden;
-    font-family: 'Courier New', Courier, monospace;
 }
-h1 {
+
+#header{
+    grid-area: head;
     position: relative;
     background-color:rgba(40, 211, 154, 0.774);
     color: #DFFF00;
-    top: 0.1em;
+    padding-top: 0.1em;
     text-align: center;
-    font-family: 'Courier New', Courier, monospace;
     font-size: 3em;
-    margin: 0;
-    padding: 0;
 }
-section {
-    position: absolute;
+
+#game {
+    grid-area: game;
     background-color: #D5F5E3;
     text-align: center;
-    height: 20em;
-    left: 25em;
-    margin: 1.5em;
-    width: 66em;
-    font-family: 'Courier New', Courier, monospace;
-    border: 6px solid #5e5eee;
+    border: 6px solid var(--main-col);
+    height: 37em;
 }
-#letterButtons {
-    position: absolute;
-    font-family: 'Courier New', Courier, monospace;
-    background-color: rgb(38, 159, 189);
-    text-align: center;
-    height: 17.9em;
-    top: 26em;
-    left: 26.6em;
-}
+
 #yourword{
-    position: absolute;
+    position: relative;
     font-size: 3em;
-    top: -0.8em;
-    left: 12.5em;
 }
+
 #hiddenWord {
-    max-width: 100%;
-    position: absolute;
-    left: 18em;
     text-transform: uppercase;
-    top: 1.5em;
-    padding: 0.5em;
-    margin: 0.5em;
-    font-size: 2em;
+    margin: 0.7em;
+    font-size: var(--org-fSize);
 }
+
 canvas {
+    grid-area: canvas;
     background-color: white;
-    position: absolute;
-    left: 1em;
-    top: 5em;
-    right: 69%;
-    border: 4px solid rgb(19, 231, 247);
+    width: 100%;
+    height: 90%;
 }
+
 #category {
     text-transform: uppercase;
     background-color: #CCCCFF;
-    position: absolute;
-    top: 4em;
-    left: 19em;
-    font-size: 2em;
-    text-align: left;
-}
-.inputTypes {
-    position: absolute;
-    font-size: 2em;
-    top: 5em;
-    left: -2em;
-}
-#inputBox {
-    width: 3rem;
+    font-size: var(--org-fSize);
     text-align: center;
-    font-size: 120%;
+}
+
+.inputTypes {
+    font-size: var(--org-fSize);
+}
+
+#keyboard {
+    grid-area: keyboard;
+    text-align: center;
+}
+
+.key{
+    margin: 0.5em;
+    background: white;
+    text-transform: uppercase;
+    padding: 0.9em 1.9em;
+    border-radius: 0.5em;
+    font-size: 1em;
+}
+
+.key:hover{
+    background-color: grey;
+}
+.key:disabled{
+    background-color: grey;
+    border-color: grey;
+    color: white;
+}
+
+#letters_row1 button {
+    flex-basis: 10em;
+    flex-grow: 1;
+}
+
+#inputBox {
+    width: 4rem;
+    text-align: center;
+    font-size: 1em;
     text-transform: uppercase;
     border: solid;
     border-color: rgb(83, 157, 243);
     margin-bottom: 1rem;
 }
+
 #checkButton {
-    font-family: 'Courier New', Courier, monospace;
     background-color: #821f68;
     color: white;
     border: none;
-    width: 70%;
+    width: 20%;
     display: inline;
     font-size: 120%;
     cursor: pointer;
-    border-radius: 2em;
+    border-radius: var(--org-fSize);
     transition-duration: 0.3s;
 }
+
 #checkButton:hover {
     background-color: white;
     color: #821f68;
     border-color: #821f68;
     border: solid;
 }
+
 #checkButton:disabled {
     background-color: grey;
     border-color: grey;
     color: white;
 }
+
 #warningMsg{
     position: absolute;
-    max-width: 30%;
-    left: 10em;
-    top: 0em;
-    background-color: black;
+    top: 3em;
+    left: 27em;
+    background-color:rgb(48, 76, 117);
     color: red;
     font-size: 1.7em;
 }
+
 #errorMsg {
-    position: absolute;
+    position: relative;
     left: 10em;
     top: 3.5em;
     color: red;
     font-size: 3em;
 }
-#lifeCount{
-    position: absolute;
-    background-color: #5e5eee;
+
+#guessCount{
+    text-align: center;
+    font-size: 2.5em;
     color:aqua;
-    font-size: 3em;
-    left: 0.3em;
-    top: 0.6em;
-    border: solid black;
+    background-color: var(--main-col);
 }
+
 #scoreCount{
-    position: absolute;
-    background-color:#5e5eee;
-    max-width: 20%;
     color: wheat;
-    font-size: 2em;
-    left: 0.5em;
-    top: -1em;
-    border: solid black;
+    background-color:var(--main-col);
+    max-width: 20%;
+    font-size: var(--org-fSize);
 }
+
 #usedLetters{
     text-transform: uppercase;
-    background-color: #c5c5d18e;
-    position: absolute;
-    left: 1em;
-    top: 7.8em;
-    font-size: 2em;
+    color: white;
+    background-color: var(--main-col);
+    font-size: var(--org-fSize);
+    margin-bottom: 0.2em;
 }
+
 .promptButtons{
     font-size: 50%;
     padding: 3%;
     margin: 2%;
 }
+
 .restartPrompt{
     position: absolute;
     text-transform: uppercase;
     background-color: rgb(240, 116, 116);
-    font-size: 3em;
-    top: 2em;
-    left: 5.5em;
+    font-size: 7em;
+    top: 4em;
+    right: 1em;
     border: 1px solid black;
-}
-.letterButton{
-    font-family: 'Courier New', Courier, monospace;
-    height: 2em;
-    font-size: 2.8em;
-    margin: 2px;
-    padding: 30px;
 }

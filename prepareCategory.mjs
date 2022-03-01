@@ -10,5 +10,6 @@ export function prepareCategory() {
     categories.socialMedias = ["youtube", "instagram", "facebook", "snapchat", "twitter"];
     categories.communications = ["discord", "skype", "whatsapp", "zoom", "teamspeak"];
     categories.drinks = ["water", "juice", "pepsi", "cocacola", "fanta", "sprite", "mountaindew", "sevenup"];
+    categories.lecturers = ['matt', 'jack', 'rich', 'david', 'mani', 'nadim', 'farzad'];
     return categories;
 }
