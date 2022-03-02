@@ -1,4 +1,4 @@
-export function generateRandomNumber(array) {
-    const rNum = Math.floor(Math.random() * array.length);
+export function generateRandomNumber(fromThis) {
+    const rNum = Math.floor(Math.random() * fromThis);
     return rNum;
 }

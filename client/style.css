@@ -14,9 +14,19 @@
     "canvas canvas canvas"
     "keyboard keyboard keyboard";
     }
-
+    
     #head {
-    font-size: 3.2vw;
+        font-size: 3.2vw;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    #game {
+        height: 70em;
+    }
+
+    #warningMsg {
+        left: 17em;
     }
 }
 
@@ -53,6 +63,7 @@ body {
     position: relative;
     background-color:rgba(40, 211, 154, 0.774);
     color: #DFFF00;
+    border: 4px solid #8b9b26;
     padding-top: 0.1em;
     text-align: center;
     font-size: 3em;
@@ -78,10 +89,9 @@ body {
 }
 
 canvas {
-    grid-area: canvas;
-    background-color: white;
     width: 100%;
-    height: 90%;
+    height: 99%;
+    border: 4px solid var(--main-col);
 }
 
 #category {
@@ -133,31 +143,6 @@ canvas {
     margin-bottom: 1rem;
 }
 
-#checkButton {
-    background-color: #821f68;
-    color: white;
-    border: none;
-    width: 20%;
-    display: inline;
-    font-size: 120%;
-    cursor: pointer;
-    border-radius: var(--org-fSize);
-    transition-duration: 0.3s;
-}
-
-#checkButton:hover {
-    background-color: white;
-    color: #821f68;
-    border-color: #821f68;
-    border: solid;
-}
-
-#checkButton:disabled {
-    background-color: grey;
-    border-color: grey;
-    color: white;
-}
-
 #warningMsg{
     position: absolute;
     top: 3em;
@@ -207,8 +192,9 @@ canvas {
     position: absolute;
     text-transform: uppercase;
     background-color: rgb(240, 116, 116);
-    font-size: 7em;
-    top: 4em;
-    right: 1em;
-    border: 1px solid black;
+    max-width: 25%;
+    font-size: 4em;
+    top: 3.5em;
+    left: 5em;
+    border: 3px solid black;
 }

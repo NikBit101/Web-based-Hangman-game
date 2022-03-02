@@ -1,27 +1,27 @@
 "use strict"
 
-import { prepareCategory } from './prepareCategory.mjs';
+import { selectRandomCategory, selectRandomWord } from './selectRandomCatWords.mjs';
+import { prepareCategories } from './prepareCategories.mjs';
 import { scoreCount } from './scoreCount.mjs';
-import { generateRandomCategory, generateRandomWord } from './generateRandomCatWords.mjs';
 import express from 'express';
 
 const app = express();
 app.use(express.static('client'));
 
-// prepare a random word based on categories
-// store it on a server here
-const categories = prepareCategory();
-let randomCategory;
+// prepare categories variable on server
+const categories = prepareCategories();
 
 function getCategory(req, res) {
-    randomCategory = generateRandomCategory(categories);
+    const randomCategory = selectRandomCategory(categories);
     console.log(` - [SERVER] Random category: ${randomCategory}`);
     res.json(randomCategory);
 }
 
 function getWord(req, res) {
-    const randomWord = generateRandomWord(categories, randomCategory);
-    console.log(` - [SERVER] Random word: ${randomWord}`);
+    const category = req.params.name;
+    console.log(` - [SERVER] Fetched category TO server: ${category}`);
+    const randomWord = selectRandomWord(category, categories);
+    console.log(` - [SERVER] Fetched word FROM server: ${randomWord}\n___`);
     res.json(randomWord);
 }
 
@@ -31,7 +31,7 @@ function getGuesses(req, res) {
 }
 
 function getScore(req, res) {
-    console.log(` - [SERVER] Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}\n___`);
+    console.log(` - [SERVER] Wins: ${scoreCount.wins}, Losses: ${scoreCount.losses}`);
     res.json(scoreCount);
 }
 
@@ -46,8 +46,8 @@ function sendScore(req, res) {
 }
 
 // get information from the server
-app.get('/categories', getCategory);
-app.get('/word', getWord);
+app.get('/category', getCategory);
+app.get('/category/:name', getWord);
 app.get('/guessCount', getGuesses);
 app.get('/score', getScore);
 

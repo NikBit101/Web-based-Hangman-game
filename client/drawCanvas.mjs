@@ -35,7 +35,7 @@ export function drawBackground() {
     // the sun
     ctx.fillStyle = 'yellow';
     ctx.beginPath();
-    ctx.arc(30, 20, 10, 0, Math.PI*2, false);
+    ctx.arc(30, 20, 12, 0, Math.PI*2, false);
     ctx.fill()
     ctx.closePath();
 }

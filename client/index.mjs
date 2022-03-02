@@ -13,7 +13,6 @@ import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
 
 let handles = {};
-let randomCategory;
 let randomWord = [];
 let usedLetters = [];
 let hiddenWord;
@@ -23,8 +22,8 @@ let guesses;
 let scoreWins;
 let scoreLosses;
 
-async function getRandomWord() {
-    const response = await fetch('word');
+async function getRandomWord(randomCat) {
+    const response = await fetch('category/' + randomCat);
     if(response.ok) {
         const fetchedWord = await response.json();
         randomWord = fetchedWord;
@@ -33,21 +32,24 @@ async function getRandomWord() {
         return;
     } else {
         handles.errorMsg.textContent = `Word failed to load`;
-        throw new Error(`[${response.status}] connection failed`);
+        throw new Error(`[${response.status}] connection failed;\n- Word failed to load`);
     }
 }
 
 async function getRandomCategory() {
-    const response = await fetch('categories');
+    const response = await fetch('category');
     if(response.ok) {
         const fetchedCategory = await response.json();
-        // display outputs taken from server
-        randomCategory = fetchedCategory;
+        // display category output taken from server
+        handles.category.value = fetchedCategory;
         displayCategory(fetchedCategory);
+
+        // request a random word in that category from server
+        getRandomWord(fetchedCategory);
         return;
     } else {
         handles.errorMsg.textContent = `Category failed to load`;
-        throw new Error(`[${response.status}] connection failed`);
+        throw new Error(`[${response.status}] connection failed;\n- category failed to load`);
     }
 
 }
@@ -67,14 +69,13 @@ async function setScore(scrW, scrL) {
         handles.scoreCount.textContent = `Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`;
     } else {
         handles.scoreCount.textContent = ['*Could not load new score :-(*'];
-        throw new Error(`[${response.status}] connection failed`);
+        throw new Error(`[${response.status}] connection failed;\n- Word failed to load`);
     }
 }
 
 // when the page is restarted, all the required variables will be reset,
 // canvas will be redrawn.
 function restartPage(theClass, prompting) {
-    randomCategory;
     randomWord = [];
     usedLetters = [];
     hiddenWord = '';
@@ -85,7 +86,6 @@ function restartPage(theClass, prompting) {
     handles.usedLetters.textContent = 'Used Letters: ';
     handles.warningMsg.style.color = 'Red';
 
-    enable.enableButton();
     enable.enableKeyButtons();
     
     if (prompting) {
@@ -96,7 +96,6 @@ function restartPage(theClass, prompting) {
     clearCanvas();
     drawBackground();
     getRandomCategory();
-    getRandomWord();
     setGuessCount();
     displayScore();
 }
@@ -148,7 +147,6 @@ function restartPrompt() {
 // disables inputs, 
 // creates a prompt for user to restart or leave the game.
 function gameStop(condition, rWord, sWins, sLosses) {
-    disable.disableButton();
     disable.disableKeyButtons();
 
     if (condition) {
@@ -180,10 +178,11 @@ function monitorGuess(gCount, rWord, scoreW, scoreL) {
     handles.scoreCount.textContent = `Wins: ${scoreW}\nLosses: ${scoreL}`;
 }
 
-// The function will check the letter input to compare it with the word
+// The function will check the letter input to compare it with the word's letters
 export function letterCheck(who) {
     const letter = who.toLowerCase();
     const usedLetterstxt = handles.usedLetters;
+    handles.warningMsg.textContent = '';
 
     // record certain letter each time the user enters it
     // check letters array based on a user input
@@ -213,114 +212,31 @@ export function letterCheck(who) {
     monitorGuess(guesses, randomWord, scoreWins, scoreLosses);
     letterFound = false;
     usedLetters.push(letter);
-    //handles.letter.value = '';
     handles.guessCount.textContent = `Guesses left: ${guesses}`;
     usedLetterstxt.textContent = `Used letters: ${usedLetters}`;
 }
 
 // this function may need to be deleted after testing
-function validateInput() {
-    const letter = handles.letter.value;
-
-    if(letter === '' || letter === ' ' || Number.isInteger(Number(letter))) {
-        handles.warningMsg.textContent = `Please input a letter into field`;
-        return;
+function validateInput(event) {
+    // Letter pressed on keyboard between A to Z
+    if (event.keyCode >= 65 && event.keyCode <= 90) {
+        const letterKey = event.key;
+        handles.letter.value = letterKey.toLowerCase();
+        
+        letterCheck(letterKey);
     }
-
-    handles.warningMsg.textContent = '';
-    letterCheck(letter);
 }
 
 // check the keys that were pressed by the user on keyboard
 function checkKeys(e) {
     if(guesses > 0) {
-        switch(e.key.toLowerCase()) {
-            // first row
-            case "enter":
-                validateInput();
-                break;
-            case "backspace":
+        switch(e.key) {
+            case "Backspace":
                 handles.letter.value = null;
                 break;
-            case "q":
-                handles.letter.value = 'q';
-                break;    
-            case "w":
-                handles.letter.value = 'w';
-                break;    
-            case "e":
-                handles.letter.value = 'e';
-                break;    
-            case "r":
-                handles.letter.value = 'r';
-                break;    
-            case "t":
-                handles.letter.value = 't';
-                break;    
-            case "y":
-                handles.letter.value = 'y';
-                break;    
-            case "u":
-                handles.letter.value = 'u';
-                break;    
-            case "i":
-                handles.letter.value = 'i';
-                break;    
-            case "o":
-                handles.letter.value = 'o';
-                break;    
-            case "p":
-                handles.letter.value = 'p';
-                break;
-            // second row
-            case "a":
-                handles.letter.value = 'a';
-                break;    
-            case "s":
-                handles.letter.value = 's';
-                break;    
-            case "d":
-                handles.letter.value = 'd';
-                break;    
-            case "f":
-                handles.letter.value = 'f';
-                break;    
-            case "g":
-                handles.letter.value = 'g';
-                break;    
-            case "h":
-                handles.letter.value = 'h';
-                break;    
-            case "j":
-                handles.letter.value = 'j';
-                break;    
-            case "k":
-                handles.letter.value = 'k';
-                break;    
-            case "l":
-                handles.letter.value = 'l';
-                break;
-            // third row
-            case "z":
-                handles.letter.value = 'z';
-                break;
-            case "x":
-                handles.letter.value = 'x';
-                break;
-            case "c":
-                handles.letter.value = 'c';
-                break;
-            case "v":
-                handles.letter.value = 'v';
-                break;
-            case "b":
-                handles.letter.value = 'b';
-                break;
-            case "n":
-                handles.letter.value = 'n';
-                break;
-            case "m":
-                handles.letter.value = 'm';
+            default:
+                // any other key pressed on a keyboard
+                validateInput(e);
                 break;
         }
     }
@@ -352,7 +268,6 @@ async function setGuessCount() {
 }
 
 function addEventListeners() {
-    handles.checkButton.addEventListener('click', validateInput);
     window.addEventListener('keydown', checkKeys);
     window.addEventListener('mouseup', whatClicked);
 }
@@ -366,7 +281,6 @@ function pageLoaded() {
     addEventListeners();
     setGuessCount();
     getRandomCategory();
-    getRandomWord();
     displayScore();
     drawBackground();
 }
