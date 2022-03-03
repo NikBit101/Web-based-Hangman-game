@@ -45,6 +45,16 @@ function sendScore(req, res) {
     res.json(scoreCount);
 }
 
+/**
+ * function addPlayer(req, res) {
+ *      const payloadName = req.body.player;
+ *      const isNewPlayer = checkPlayers(payloadName);
+ *      if (isNewPlayer) {
+ *          storePlayer(payloadName);
+ *      }
+ * }
+ */
+
 // get information from the server
 app.get('/category', getCategory);
 app.get('/category/:name', getWord);
@@ -53,5 +63,8 @@ app.get('/score', getScore);
 
 // send information to the server
 app.post('/score', express.json(), sendScore);
+/**
+ * app.post('/playerName', express.json(), addPlayer);
+ */
 
 app.listen(8080);

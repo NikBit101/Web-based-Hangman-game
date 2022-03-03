@@ -229,7 +229,7 @@ function validateInput(event) {
 
 // check the keys that were pressed by the user on keyboard
 function checkKeys(e) {
-    if(guesses > 0) {
+    if(guesses > 0 && !condition) {
         switch(e.key) {
             case "Backspace":
                 handles.letter.value = null;
