@@ -36,3 +36,5 @@
 # - Improved validation of the input based on whichever key was presed on user keyboard,
 # - Removed the 'check' button as it was pointless to have it at this point,
 # - improved the design of the game more to make the UI appeal better, using grids.
+
+# [NEW_BRANCH]
