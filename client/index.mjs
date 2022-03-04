@@ -26,7 +26,7 @@ async function getRandomWord(randomCat) {
     const response = await fetch('category/' + randomCat);
     if(response.ok) {
         const fetchedWord = await response.json();
-        randomWord = fetchedWord;
+        randomWord = fetchedWord.toLowerCase();
         hiddenWord = hideWord(fetchedWord);
         displayHiddenWord(hiddenWord);
         return;
@@ -53,6 +53,13 @@ async function getRandomCategory() {
     }
 
 }
+
+/**
+ * send to server the name of the player
+ * async function sendPlayer(pName) {
+ *      const payload = { pName }
+ * }
+ */
 
 // send to server the current score, thereby updating it
 async function setScore(scrW, scrL) {
@@ -173,6 +180,9 @@ function monitorGuess(gCount, rWord, scoreW, scoreL) {
     } else if (hiddenWord.join('') === randomWord && gCount > 0){
         condition = true;
         gameStop(condition, rWord, scoreW, scoreL);
+    } else if (randomWord.includes(' ')) {
+        // if the word has a whitespace
+        randomWord.replace(' ', '');
     }
 
     handles.scoreCount.textContent = `Wins: ${scoreW}\nLosses: ${scoreL}`;
@@ -193,6 +203,13 @@ export function letterCheck(who) {
             return;
         }
     }
+    
+    /**
+     * Check if the chosen word has any whitespace
+     * if(randomWord.includes(' ')) {
+     *      
+     * }
+     */
     
     // go through word array to find the letter in that word
     for(let i = 0; i < randomWord.length; i++) {
