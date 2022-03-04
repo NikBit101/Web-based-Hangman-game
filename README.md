@@ -38,3 +38,4 @@
 # - improved the design of the game more to make the UI appeal better, using grids.
 
 # [NEW_BRANCH]
+# added lint
