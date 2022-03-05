@@ -1,43 +1,41 @@
 export function drawBackground() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-
-    // canvas width: 300
-    // height: 150
-
-    // sky
-    ctx.fillStyle = '#87CEEB';
-    ctx.fillRect(0, 0, canvas.width, 80);
-
-    // ground
-    ctx.fillStyle = '#008000';
-    ctx.fillRect(0, 80, canvas.width, canvas.height);
-
-    /**
-     * house in background
-     * wall-part of house
-     */
-    ctx.fillStyle = '#964B00';
-    ctx.fillRect(180, 60, 80, 20);
-    
-    /**
-     * roof
-     */
-    ctx.fillStyle = '#D2691E';
-    ctx.beginPath();
-    ctx.moveTo(180, 60);
-    ctx.lineTo(260, 60);
-    ctx.lineTo(220, 40);
-    ctx.lineTo(180, 60);
-    ctx.fill();
-    ctx.closePath();
-
-    // the sun
-    ctx.fillStyle = 'yellow';
-    ctx.beginPath();
-    ctx.arc(30, 20, 12, 0, Math.PI*2, false);
-    ctx.fill()
-    ctx.closePath();
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  //
+  // canvas width: 300
+  // height: 150
+  //
+  // sky
+  ctx.fillStyle = '#87CEEB';
+  ctx.fillRect(0, 0, canvas.width, 80);
+  
+  // ground
+  ctx.fillStyle = '#008000';
+  ctx.fillRect(0, 80, canvas.width, canvas.height);
+  /**
+   * house in background
+   * wall-part of house
+   */
+  ctx.fillStyle = '#964B00';
+  ctx.fillRect(180, 60, 80, 20);
+  
+  /**
+   * roof
+   */
+  ctx.fillStyle = '#D2691E';
+  ctx.beginPath();
+  ctx.moveTo(180, 60);
+  ctx.lineTo(260, 60);
+  ctx.lineTo(220, 40);
+  ctx.lineTo(180, 60);
+  ctx.fill();
+  ctx.closePath();
+  // the sun
+  ctx.fillStyle = 'yellow';
+  ctx.beginPath();
+  ctx.arc(30, 20, 12, 0, Math.PI * 2, false);
+  ctx.fill();
+  ctx.closePath();
 }
 
 export function drawSmallSticks() {
@@ -102,7 +100,7 @@ export function drawRope() {
     
     ctx.beginPath();
     ctx.lineWidth = 2;
-    ctx.arc(halfWidth + 10, halfHeight - 15, 8, 0, Math.PI*2, false);
+    ctx.arc(halfWidth + 10, halfHeight - 15, 8, 0, Math.PI * 2, false);
     ctx.stroke();
 }
 
@@ -117,7 +115,7 @@ export function drawStickHead() {
 
     // face
     ctx.beginPath();
-    ctx.arc((halfWidth + 10), (halfHeight - 11), 5, 0, Math.PI*2, false);
+    ctx.arc((halfWidth + 10), (halfHeight - 11), 5, 0, Math.PI * 2, false);
     ctx.stroke();
     ctx.fill();
     ctx.closePath();
