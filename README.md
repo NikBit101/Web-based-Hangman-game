@@ -39,3 +39,7 @@
 
 # [NEW_BRANCH]
 # added lint
+
+
+# [8]
+# Made some changes to the code and added package.json for 'eslint' config

@@ -31,6 +31,7 @@ async function getRandomWord(randomCat) {
         displayHiddenWord(hiddenWord);
         return;
     } else {
+        disable.disableKeyButtons();
         handles.errorMsg.textContent = `Word failed to load`;
         throw new Error(`[${response.status}] connection failed;\n- Word failed to load`);
     }
@@ -48,6 +49,7 @@ async function getRandomCategory() {
         getRandomWord(fetchedCategory);
         return;
     } else {
+        disable.disableKeyButtons();
         handles.errorMsg.textContent = `Category failed to load`;
         throw new Error(`[${response.status}] connection failed;\n- category failed to load`);
     }
@@ -91,7 +93,7 @@ function restartPage(theClass, prompting) {
     handles.letter.value = '';
     handles.warningMsg.textContent = '';
     handles.usedLetters.textContent = 'Used Letters: ';
-    handles.warningMsg.style.color = 'Red';
+    handles.warningMsg.style.color = 'rgb(255, 214, 139)';
 
     enable.enableKeyButtons();
     
@@ -134,7 +136,7 @@ function restartPrompt() {
     btnNo.setAttribute('class', "promptButtons");
     btnYes.textContent = "Yes";
     btnNo.textContent = "No";
-    
+
     newClass.append(btnYes);
     newClass.append(btnNo);
     gameSec.append(newClass);
@@ -267,7 +269,12 @@ async function displayScore() {
         scoreWins = sCount.wins;
         scoreLosses = sCount.losses;
     } else {
-        scoreWins = ['*Could not load wins/losses :-(*'];
+        disable.disableKeyButtons();
+        scoreWins = ['N/A'];
+        scoreLosses = ['N/A'];
+        handles.errorMsg.textContent = `Score failed to load`;
+        throw new Error(`[${response.status}] connection failed;\n- Score failed to load`);
+    
     }
     handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
 }
@@ -279,7 +286,10 @@ async function setGuessCount() {
         let lCount = await response.json();
         guesses = lCount.guesses;
     } else {
-        guesses = [' *Could not load guesses* '];
+        disable.disableKeyButtons();
+        guesses = ['N/A'];
+        handles.errorMsg.textContent = `Guess count failed to load`;
+        throw new Error(`[${response.status}] connection failed;\n- Guess count failed to load`);
     }
     handles.guessCount.textContent = `Guesses left: ${guesses}`;
 }

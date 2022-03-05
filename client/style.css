@@ -74,7 +74,7 @@ body {
     background-color: #D5F5E3;
     text-align: center;
     border: 6px solid var(--main-col);
-    height: 37em;
+    height: 38em;
 }
 
 #yourword{
@@ -111,16 +111,17 @@ canvas {
 }
 
 .key{
-    margin: 0.5em;
+    margin: 0.1em;
     background: white;
     text-transform: uppercase;
-    padding: 0.9em 1.9em;
+    padding: 0.5em 1.1em;
     border-radius: 0.5em;
-    font-size: 1em;
+    font-size: 1.8em;
 }
 
 .key:hover{
     background-color: grey;
+    color: white;
 }
 .key:disabled{
     background-color: grey;
@@ -145,15 +146,14 @@ canvas {
 
 #warningMsg{
     position: absolute;
-    top: 3em;
-    left: 27em;
-    background-color:rgb(48, 76, 117);
-    color: red;
-    font-size: 1.7em;
+    top: 2.7em;
+    left: 22.8em;
+    background-color: rgb(100, 162, 190);
+    color: rgb(255, 214, 139);
+    font-size: 2em;
 }
 
 #errorMsg {
-    position: relative;
     left: 10em;
     top: 3.5em;
     color: red;
@@ -183,16 +183,22 @@ canvas {
 }
 
 .promptButtons{
-    font-size: 50%;
-    padding: 3%;
-    margin: 2%;
+    font-size: 0.5em;
+    margin: 0.5em;
+    border-radius: 0.5em;
+    padding: 0.5em 1.1em;
+}
+.promptButtons:hover{
+    background-color: grey;
+    color: white;
 }
 
 .restartPrompt{
     position: absolute;
+    text-align: center;
     text-transform: uppercase;
     background-color: rgb(240, 116, 116);
-    max-width: 25%;
+    max-width: 28%;
     font-size: 4em;
     top: 3.5em;
     left: 5em;

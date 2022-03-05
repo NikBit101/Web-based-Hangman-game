@@ -1,0 +1,25 @@
+{
+  "name": "hangmangame",
+  "version": "1.0.0",
+  "description": "a server-side hangman game built by Nikita Cernenko for coursework project",
+  "main": "index.js",
+  "dependencies": {
+    "eslint": "^8.10.0",
+    "eslint-config-portsoc": "^1.0.0",
+    "express": "^4.17.2"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/NikBit101/AppProgCwk.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/NikBit101/AppProgCwk/issues"
+  },
+  "homepage": "https://github.com/NikBit101/AppProgCwk#readme"
+}
