@@ -1,3 +1,5 @@
+'use strict';
+
 export function drawBackground() {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
@@ -8,7 +10,7 @@ export function drawBackground() {
   // sky
   ctx.fillStyle = '#87CEEB';
   ctx.fillRect(0, 0, canvas.width, 80);
-  
+
   // ground
   ctx.fillStyle = '#008000';
   ctx.fillRect(0, 80, canvas.width, canvas.height);
@@ -18,7 +20,7 @@ export function drawBackground() {
    */
   ctx.fillStyle = '#964B00';
   ctx.fillRect(180, 60, 80, 20);
-  
+
   /**
    * roof
    */
@@ -39,159 +41,159 @@ export function drawBackground() {
 }
 
 export function drawSmallSticks() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#654321';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = '#654321';
 
-    ctx.beginPath();
-    ctx.moveTo((halfWidth - 100), (halfHeight + 40));
-    ctx.lineTo((halfWidth - 80), (halfHeight + 30));
-    ctx.lineTo((halfWidth - 60), (halfHeight + 40));
-    ctx.stroke();
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.moveTo((halfWidth - 100), (halfHeight + 40));
+  ctx.lineTo((halfWidth - 80), (halfHeight + 30));
+  ctx.lineTo((halfWidth - 60), (halfHeight + 40));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 export function drawVerticalStick() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 10;
-    ctx.strokeStyle = '#654321';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 10;
+  ctx.strokeStyle = '#654321';
 
-    ctx.beginPath();
-    ctx.lineTo((halfWidth - 80), (halfHeight + 30));
-    ctx.lineTo((halfWidth - 80), (halfHeight - 30));
-    ctx.stroke();
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.lineTo((halfWidth - 80), (halfHeight + 30));
+  ctx.lineTo((halfWidth - 80), (halfHeight - 30));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 export function drawHorizontalStick() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = '#654321';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = '#654321';
 
-    ctx.beginPath();
-    ctx.moveTo((halfWidth - 85), (halfHeight - 30));
-    ctx.lineTo((halfWidth + 10), (halfHeight - 30));
-    ctx.stroke();
-    ctx.closePath();
+  ctx.beginPath();
+  ctx.moveTo((halfWidth - 85), (halfHeight - 30));
+  ctx.lineTo((halfWidth + 10), (halfHeight - 30));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 export function drawRope() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = '#652143';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = '#652143';
 
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight - 30));
-    ctx.lineTo((halfWidth + 10), (halfHeight - 20));
-    ctx.stroke();
-    ctx.closePath();
-    
-    ctx.beginPath();
-    ctx.lineWidth = 2;
-    ctx.arc(halfWidth + 10, halfHeight - 15, 8, 0, Math.PI * 2, false);
-    ctx.stroke();
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight - 30));
+  ctx.lineTo((halfWidth + 10), (halfHeight - 20));
+  ctx.stroke();
+  ctx.closePath();
+
+  ctx.beginPath();
+  ctx.lineWidth = 2;
+  ctx.arc(halfWidth + 10, halfHeight - 15, 8, 0, Math.PI * 2, false);
+  ctx.stroke();
 }
 
 export function drawStickHead() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 5;
-    ctx.fillStyle = 'black';
-    ctx.strokeStyle = 'black';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 5;
+  ctx.fillStyle = 'black';
+  ctx.strokeStyle = 'black';
 
-    // face
-    ctx.beginPath();
-    ctx.arc((halfWidth + 10), (halfHeight - 11), 5, 0, Math.PI * 2, false);
-    ctx.stroke();
-    ctx.fill();
-    ctx.closePath();
+  // face
+  ctx.beginPath();
+  ctx.arc((halfWidth + 10), (halfHeight - 11), 5, 0, Math.PI * 2, false);
+  ctx.stroke();
+  ctx.fill();
+  ctx.closePath();
 }
 
 export function drawStickBody() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 5;
-    ctx.strokeStyle = 'black';
-    
-    // body stick
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight - 5));
-    ctx.lineTo((halfWidth + 10), (halfHeight + 20));
-    ctx.stroke();
-    ctx.closePath();
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 5;
+  ctx.strokeStyle = 'black';
+
+  // body stick
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight - 5));
+  ctx.lineTo((halfWidth + 10), (halfHeight + 20));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 export function drawStickArms() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = 'black';
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = 'black';
 
-    // arms
-    // left
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight));
-    ctx.lineTo((halfWidth - 10), (halfHeight + 10));
-    ctx.stroke();
-    ctx.closePath();
-    
-    // right
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight));
-    ctx.lineTo((halfWidth + 30), (halfHeight + 10));
-    ctx.stroke();
-    ctx.closePath();
+  // arms
+  // left
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight));
+  ctx.lineTo((halfWidth - 10), (halfHeight + 10));
+  ctx.stroke();
+  ctx.closePath();
+
+  // right
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight));
+  ctx.lineTo((halfWidth + 30), (halfHeight + 10));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 export function drawStickLegs() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    const halfWidth = canvas.width / 2;
-    const halfHeight = canvas.height / 2;
-    ctx.lineWidth = 3;
-    ctx.strokeStyle = 'black';
-    
-    // legs
-    // left
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight + 20));
-    ctx.lineTo((halfWidth - 10), (halfHeight + 30));
-    ctx.stroke();
-    ctx.closePath();
-    
-    // right
-    ctx.beginPath();
-    ctx.moveTo((halfWidth + 10), (halfHeight + 20));
-    ctx.lineTo((halfWidth + 30), (halfHeight + 30));
-    ctx.stroke();
-    ctx.closePath();
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  const halfWidth = canvas.width / 2;
+  const halfHeight = canvas.height / 2;
+  ctx.lineWidth = 3;
+  ctx.strokeStyle = 'black';
+
+  // legs
+  // left
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight + 20));
+  ctx.lineTo((halfWidth - 10), (halfHeight + 30));
+  ctx.stroke();
+  ctx.closePath();
+
+  // right
+  ctx.beginPath();
+  ctx.moveTo((halfWidth + 10), (halfHeight + 20));
+  ctx.lineTo((halfWidth + 30), (halfHeight + 30));
+  ctx.stroke();
+  ctx.closePath();
 }
 
 // clear canvas for redrawing
 export function clearCanvas() {
-    const canvas = document.querySelector('canvas');
-    const ctx = canvas.getContext('2d');
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.beginPath();
-    ctx.moveTo(0, 0);
-    ctx.lineTo(canvas.width, canvas.height);
-    ctx.stroke();
+  const canvas = document.querySelector('canvas');
+  const ctx = canvas.getContext('2d');
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  ctx.beginPath();
+  ctx.moveTo(0, 0);
+  ctx.lineTo(canvas.width, canvas.height);
+  ctx.stroke();
 }

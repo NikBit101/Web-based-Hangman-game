@@ -1,7 +1,9 @@
 :root{
     --main-col: #5e5eee;
     --main-font: 'Courier New', Courier, monospace;
+    --org-border: 3px solid black;
     --org-fSize: 2em;
+    --org-border-radius: 0.5em;
     --maxWidth: 100%;
 }
 
@@ -115,7 +117,7 @@ canvas {
     background: white;
     text-transform: uppercase;
     padding: 0.5em 1.1em;
-    border-radius: 0.5em;
+    border-radius: var(--org-border-radius);
     font-size: 1.8em;
 }
 
@@ -185,7 +187,7 @@ canvas {
 .promptButtons{
     font-size: 0.5em;
     margin: 0.5em;
-    border-radius: 0.5em;
+    border-radius: var(--org-border-radius);
     padding: 0.5em 1.1em;
 }
 .promptButtons:hover{
@@ -202,5 +204,30 @@ canvas {
     font-size: 4em;
     top: 3.5em;
     left: 5em;
-    border: 3px solid black;
+    border: var(--org-border);
+}
+#nameInput{
+    text-align: center;
+    font-size: 0.7em;
+    width: 7em;
+    height: 1.5em;
+}
+#btnSubmit{
+    font-size: 0.9em;
+    margin: 0.5em;
+    border-radius: var(--org-border-radius);
+}
+#btnSubmit:hover{
+    background-color: grey;
+    color: white;
+}
+
+.namePrompt{
+    position: absolute;
+    text-align: center;
+    background-color: rgb(240, 116, 116);
+    font-size: 3em;
+    top: 4.5em;
+    left: 6em;
+    border: var(--org-border);
 }

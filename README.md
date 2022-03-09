@@ -1,6 +1,7 @@
 # AppProgCwk
+# Server-side Hangman game
 
-# [GitPushNumber]
+# **[GitPushNumber]**
 
 # [1] Added all the files into here, the index.mjs will need more modularisation
 
@@ -43,3 +44,6 @@
 
 # [8]
 # Made some changes to the code and added package.json for 'eslint' config
+
+# [9]
+# Fixed problems identified by ESLint, also adding the name option after the player decides to finish playing the game
