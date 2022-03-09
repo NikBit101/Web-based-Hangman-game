@@ -3,24 +3,24 @@
 
 # **[GitPushNumber]**
 
-# [1] Added all the files into here, the index.mjs will need more modularisation
+# **[1]** Added all the files into here, the index.mjs will need more modularisation
 
 # pushed to github
 
-# [TESTING] button pushing
+# **[TESTING]** button pushing
 
-# [2] Ditched the idea of 'inputbox',
+# **[2]** Ditched the idea of 'inputbox',
 # added letters as buttons instead,
 # improved the design of the game to make the UI appeal better.
 
-# [3] Made functionality of the letter-buttons on screen,
+# **[3]** Made functionality of the letter-buttons on screen,
 # allowing the user to use both the keyboard and buttons to choose their letter.
 
-# [4] Generating randoms moved from client to server
+# **[4]** Generating randoms moved from client to server
 
-# [5] Improved the wins/losses grabbed from server and set on client
+# **[5]** Improved the wins/losses grabbed from server and set on client
 
-# [6]
+# **[6]**
 # - Added the grid style,
 # - Improved the UI,
 # - Changed 'lives' variables to 'guesses',
@@ -28,7 +28,7 @@
 # - Added a category 'lecturers',
 # - Changed canvas properties.
 
-# [7]
+# **[7]**
 # improved coding structure and functions;
 # - Improved namings of functions and variables,
 # - The server is not at fixed state anymore (in case of multiplayer),
@@ -38,12 +38,12 @@
 # - Removed the 'check' button as it was pointless to have it at this point,
 # - improved the design of the game more to make the UI appeal better, using grids.
 
-# [NEW_BRANCH]
+# **[NEW_BRANCH]**
 # added lint
 
 
-# [8]
+# **[8]**
 # Made some changes to the code and added package.json for 'eslint' config
 
-# [9]
+# **[9]**
 # Fixed problems identified by ESLint, also adding the name option after the player decides to finish playing the game
