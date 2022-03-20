@@ -8,7 +8,7 @@ import { prepareHandles } from './prepareHandles.mjs';
 import { createPrompt } from './createPrompt.mjs';
 import { whatClicked } from './mouseClickCheck.mjs';
 import { guessCount } from './guessCount.mjs';
-import { promptName } from './nameAssignment.mjs';
+import { promptStat } from './statAssignment.mjs';
 import { hideWord } from './hideWord.mjs';
 import * as disable from './disableInputs.mjs';
 import * as enable from './enableInputs.mjs';
@@ -55,13 +55,6 @@ async function getRandomCategory() {
   }
 }
 
-/**
- * send to server the name of the player
- * async function sendPlayer(pName) {
- *      const payload = { pName }
- * }
- */
-
 // send to server the current score, thereby updating it
 async function setScore(scrW, scrL) {
   const payload = { wins: scrW, losses: scrL };
@@ -72,9 +65,9 @@ async function setScore(scrW, scrL) {
   });
   if (response.ok) {
     const scoreCount = await response.json();
-    scoreCount.wins = scoreWins;
-    scoreCount.losses = scoreLosses;
-    handles.scoreCount.textContent = `Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`;
+    scoreCount.wins = scrW;
+    scoreCount.losses = scrL;
+    handles.scoreCountt.textContent = `Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`;
   } else {
     handles.scoreCount.textContent = ['*Could not load new score :-(*'];
     throw new Error(`[${response.status}] connection failed;\n- Word failed to load`);
@@ -144,12 +137,12 @@ function restartPrompt() {
 
   // stop playing through a button 'No'
   /**
-     * firstly, assign the user name prompted by user, then
+     * firstly, assign the user stats prompted by user, then
      * pass it to a server.
      */
   document.querySelector('#btnNo').addEventListener('click', function () {
     removeClass(handles, newClass);
-    promptName(gameSec);
+    promptStat(gameSec, scoreWins, scoreLosses);
   });
 }
 
