@@ -3,6 +3,7 @@
 import { selectRandomCategory, selectRandomWord } from './selectRandomCatWords.mjs';
 import { prepareCategories } from './prepareCategories.mjs';
 import { scoreCount } from './scoreCount.mjs';
+import * as pl from './players.mjs';
 import express from 'express';
 
 const app = express();
@@ -45,15 +46,22 @@ function sendScore(req, res) {
   res.json(scoreCount);
 }
 
-/**
- * function addPlayer(req, res) {
- *      const payloadName = req.body.player;
- *      const isNewPlayer = checkPlayers(payloadName);
- *      if (isNewPlayer) {
- *          storePlayer(payloadName);
- *      }
- * }
- */
+// store player name and their score
+function postPlayer(req, res) {
+  const payloadName = req.body.name;
+  const payloadWins = req.body.wins;
+  const payloadLosses = req.body.losses;
+  const isNewPlayer = pl.checkPlayers(payloadName);
+  if (isNewPlayer) {
+    console.log(`Sent player: ${payloadName}, ${payloadWins}, ${payloadLosses}`);
+    const newStat = pl.storePlayer(payloadName, payloadWins, payloadLosses);
+    console.log(newStat);
+    res.json(newStat);
+  } else {
+    console.error(`The name ${payloadName} already exists!`);
+    res.send(`${payloadName} already exists!`);
+  }
+}
 
 // get information from the server
 app.get('/category', getCategory);
@@ -63,8 +71,6 @@ app.get('/score', getScore);
 
 // send information to the server
 app.post('/score', express.json(), sendScore);
-/**
- * app.post('/playerName', express.json(), addPlayer);
- */
+app.post('/newPlayerStat', express.json(), postPlayer);
 
 app.listen(8080);

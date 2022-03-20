@@ -1,8 +1,17 @@
 import { specialCharacters } from './specialCharacters.mjs';
+import { postStat } from './postStat.mjs';
+import { removeClass } from './removePromptClass.mjs';
+import { prepareHandles } from './prepareHandles.mjs';
 
-export function promptName(gameSection) {
-  checkEvent();
+let sWins;
+let sLosses;
+
+export function promptStat(gameSection, wins, losses) {
+  sWins = wins;
+  sLosses = losses;
+
   createNamePrompt(gameSection);
+  checkEvent();
 }
 
 function createNamePrompt(gameSection) {
@@ -29,22 +38,28 @@ function createNamePrompt(gameSection) {
   newClass.append(btnSubmit);
 
   gameSection.append(newClass);
-
-  console.log(newClass);
 }
 
 function validateInput() {
   const name = document.querySelector('#nameInput');
-  console.log(name.value);
 
-  // loop through characters to identify unwanted one
+  /*
+  for (let i = 0; i < name.length; i += 1) {
+    if (name.value[i] === character) {
+  }
+  */
+
+  // loop through characters to identify restricted one
   for (const character of specialCharacters) {
     if (name.value.includes(character)) {
-      console.log(`Character '${character} is not allowed in your name.\n You entered: ${name.textContent}'`);
-    } else {
-      console.log('reached here');
+      console.log(`Character '${character}' is not allowed in your name.\n You entered: '${name.value}'`);
+      return;
     }
-  }
+  } // if no restricted characters found in name, continue
+  const handles = prepareHandles();
+  const nameClass = document.querySelector('.namePrompt');
+  removeClass(handles, nameClass);
+  postStat(name.value, sWins, sLosses);
 }
 
 function checkEvent() {
