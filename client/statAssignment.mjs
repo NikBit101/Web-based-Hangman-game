@@ -1,15 +1,31 @@
-import { specialCharacters } from './specialCharacters.mjs';
-import { postStat } from './postStat.mjs';
-import { removeClass } from './removePromptClass.mjs';
 import { prepareHandles } from './prepareHandles.mjs';
+import { removeClass } from './createPrompt.mjs';
+import * as keyButtons from './keyButtons.mjs';
 
+const specialCharacters = [' ', '#', '!', '"', '£', '$', '%', '^', '&', '*', '(', ')', '_', '-', '=', '+', '`', '?', '/', '.', '>', ',', '<', '|', '¬'];
 let sWins;
 let sLosses;
 
-export function promptStat(gameSection, wins, losses) {
-  sWins = wins;
-  sLosses = losses;
+// get the score from server and display here
+async function getScore() {
+  const handles = prepareHandles();
+  const response = await fetch('score');
+  if (response.ok) {
+    const sCount = await response.json();
+    sWins = sCount.wins;
+    sLosses = sCount.losses;
+  } else {
+    keyButtons.disableKeyButtons();
+    sWins = ['N/A'];
+    sLosses = ['N/A'];
+    handles.errorMsg.textContent = 'Score failed to load';
+    throw new Error(`[${response.status}] connection failed;\n- Score failed to load`);
+  }
+  handles.scoreCount.textContent = `Wins: ${sWins}\nLosses: ${sLosses}`;
+}
 
+export function promptStat(gameSection) {
+  getScore();
   createNamePrompt(gameSection);
   checkEvent();
 }
@@ -40,6 +56,20 @@ function createNamePrompt(gameSection) {
   gameSection.append(newClass);
 }
 
+// send to server the name of the player
+async function postStat(who, winCount, lossCount) {
+  const payload = { name: who, wins: winCount, losses: lossCount };
+  const response = await fetch('newPlayerStat', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload),
+  });
+  if (!response.ok) {
+    throw new Error(`[${response.status}] connection failed;\n- Failed to post new player stats.`);
+  }
+}
+
+
 function validateInput() {
   const name = document.querySelector('#nameInput');
 
@@ -51,7 +81,7 @@ function validateInput() {
 
   // loop through characters to identify restricted one
   for (const character of specialCharacters) {
-    if (name.value.includes(character)) {
+    if (name.value.includes(character) || name.value === ' ' || name.value === '') {
       console.log(`Character '${character}' is not allowed in your name.\n You entered: '${name.value}'`);
       return;
     }

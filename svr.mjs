@@ -48,13 +48,14 @@ function sendScore(req, res) {
 
 // store player name and their score
 function postPlayer(req, res) {
+  // const payloadWins = req.body.wins;
+  // const payloadLosses = req.body.losses;
   const payloadName = req.body.name;
-  const payloadWins = req.body.wins;
-  const payloadLosses = req.body.losses;
+  console.log(scoreCount);
   const isNewPlayer = pl.checkPlayers(payloadName);
   if (isNewPlayer) {
-    console.log(`Sent player: ${payloadName}, ${payloadWins}, ${payloadLosses}`);
-    const newStat = pl.storePlayer(payloadName, payloadWins, payloadLosses);
+    console.log(`Sent player: ${payloadName}`);
+    const newStat = pl.storePlayer(payloadName, scoreCount.wins, scoreCount.losses);
     console.log(newStat);
     res.json(newStat);
   } else {
@@ -70,7 +71,7 @@ app.get('/guessCount', getGuesses);
 app.get('/score', getScore);
 
 // send information to the server
-app.post('/score', express.json(), sendScore);
+app.post('/sendScore', express.json(), sendScore);
 app.post('/newPlayerStat', express.json(), postPlayer);
 
 app.listen(8080);

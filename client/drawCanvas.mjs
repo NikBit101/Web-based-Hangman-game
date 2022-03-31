@@ -4,7 +4,7 @@ export function drawBackground() {
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   //
-  // canvas width: 300
+  // canvas width: 200
   // height: 150
   //
   // sky
@@ -19,19 +19,20 @@ export function drawBackground() {
    * wall-part of house
    */
   ctx.fillStyle = '#964B00';
-  ctx.fillRect(180, 60, 80, 20);
+  ctx.fillRect(130, 60, 40, 20);
 
   /**
    * roof
    */
   ctx.fillStyle = '#D2691E';
   ctx.beginPath();
-  ctx.moveTo(180, 60);
-  ctx.lineTo(260, 60);
-  ctx.lineTo(220, 40);
-  ctx.lineTo(180, 60);
+  ctx.moveTo(130, 60);
+  ctx.lineTo(170, 60);
+  ctx.lineTo(150, 45);
+  ctx.lineTo(130, 60);
   ctx.fill();
   ctx.closePath();
+
   // the sun
   ctx.fillStyle = 'yellow';
   ctx.beginPath();
@@ -40,7 +41,9 @@ export function drawBackground() {
   ctx.closePath();
 }
 
-export function drawSmallSticks() {
+export function drawSmallSticks(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
@@ -49,29 +52,32 @@ export function drawSmallSticks() {
   ctx.strokeStyle = '#654321';
 
   ctx.beginPath();
-  ctx.moveTo((halfWidth - 100), (halfHeight + 40));
-  ctx.lineTo((halfWidth - 80), (halfHeight + 30));
-  ctx.lineTo((halfWidth - 60), (halfHeight + 40));
+  ctx.moveTo((halfWidth - 80), (halfHeight + 40));
+  ctx.lineTo((halfWidth - 60), (halfHeight + 30));
+  ctx.lineTo((halfWidth - 40), (halfHeight + 40));
   ctx.stroke();
   ctx.closePath();
 }
 
-export function drawVerticalStick() {
+export function drawVerticalStick(isFound) {
+  if (isFound) { return; }
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
-  ctx.lineWidth = 10;
+  ctx.lineWidth = 5;
   ctx.strokeStyle = '#654321';
 
   ctx.beginPath();
-  ctx.lineTo((halfWidth - 80), (halfHeight + 30));
-  ctx.lineTo((halfWidth - 80), (halfHeight - 30));
+  ctx.lineTo((halfWidth - 60), (halfHeight + 30));
+  ctx.lineTo((halfWidth - 60), (halfHeight - 30));
   ctx.stroke();
   ctx.closePath();
 }
 
-export function drawHorizontalStick() {
+export function drawHorizontalStick(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
@@ -80,85 +86,88 @@ export function drawHorizontalStick() {
   ctx.strokeStyle = '#654321';
 
   ctx.beginPath();
-  ctx.moveTo((halfWidth - 85), (halfHeight - 30));
-  ctx.lineTo((halfWidth + 10), (halfHeight - 30));
+  ctx.moveTo((halfWidth - 63), (halfHeight - 30));
+  ctx.lineTo((halfWidth), (halfHeight - 30));
   ctx.stroke();
   ctx.closePath();
 }
 
-export function drawRope() {
+export function drawRope(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
-  ctx.lineWidth = 5;
+  ctx.lineWidth = 3;
   ctx.strokeStyle = '#652143';
 
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight - 30));
-  ctx.lineTo((halfWidth + 10), (halfHeight - 20));
+  ctx.moveTo((halfWidth), (halfHeight - 32));
+  ctx.lineTo((halfWidth), (halfHeight - 20));
   ctx.stroke();
   ctx.closePath();
-
-  ctx.beginPath();
-  ctx.lineWidth = 2;
-  ctx.arc(halfWidth + 10, halfHeight - 15, 8, 0, Math.PI * 2, false);
-  ctx.stroke();
 }
 
-export function drawStickHead() {
+export function drawStickHead(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
   ctx.lineWidth = 5;
-  ctx.fillStyle = 'black';
+  ctx.fillStyle = 'white';
   ctx.strokeStyle = 'black';
 
   // face
   ctx.beginPath();
-  ctx.arc((halfWidth + 10), (halfHeight - 11), 5, 0, Math.PI * 2, false);
+  ctx.arc((halfWidth), (halfHeight - 13), 5, 0, Math.PI * 2, false);
   ctx.stroke();
   ctx.fill();
   ctx.closePath();
 }
 
-export function drawStickBody() {
+export function drawStickBody(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
   ctx.lineWidth = 5;
-  ctx.strokeStyle = 'black';
+  ctx.strokeStyle = 'red';
 
   // body stick
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight - 5));
-  ctx.lineTo((halfWidth + 10), (halfHeight + 20));
+  ctx.moveTo((halfWidth), (halfHeight - 5));
+  ctx.lineTo((halfWidth), (halfHeight + 20));
   ctx.stroke();
   ctx.closePath();
 }
 
-export function drawStickArms() {
+export function drawStickArms(isFound) {
+  if (isFound) { return; }
+
   const canvas = document.querySelector('canvas');
   const ctx = canvas.getContext('2d');
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
   ctx.lineWidth = 3;
-  ctx.strokeStyle = 'black';
+  ctx.strokeStyle = 'yellow';
 
   // arms
   // left
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight));
-  ctx.lineTo((halfWidth - 10), (halfHeight + 10));
+  ctx.moveTo((halfWidth), (halfHeight));
+  ctx.lineTo((halfWidth - 20), (halfHeight + 10));
   ctx.stroke();
   ctx.closePath();
 
   // right
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight));
-  ctx.lineTo((halfWidth + 30), (halfHeight + 10));
+  ctx.moveTo((halfWidth), (halfHeight));
+  ctx.lineTo((halfWidth + 20), (halfHeight + 10));
   ctx.stroke();
   ctx.closePath();
 }
@@ -169,20 +178,20 @@ export function drawStickLegs() {
   const halfWidth = canvas.width / 2;
   const halfHeight = canvas.height / 2;
   ctx.lineWidth = 3;
-  ctx.strokeStyle = 'black';
+  ctx.strokeStyle = 'lime';
 
   // legs
   // left
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight + 20));
-  ctx.lineTo((halfWidth - 10), (halfHeight + 30));
+  ctx.moveTo((halfWidth), (halfHeight + 20));
+  ctx.lineTo((halfWidth - 20), (halfHeight + 30));
   ctx.stroke();
   ctx.closePath();
 
   // right
   ctx.beginPath();
-  ctx.moveTo((halfWidth + 10), (halfHeight + 20));
-  ctx.lineTo((halfWidth + 30), (halfHeight + 30));
+  ctx.moveTo((halfWidth), (halfHeight + 20));
+  ctx.lineTo((halfWidth + 20), (halfHeight + 30));
   ctx.stroke();
   ctx.closePath();
 }

@@ -1,6 +1,9 @@
 'use strict';
 
-import { generateRandomNumber } from './generateRandomNumber.mjs';
+function generateRandomNumber(fromThis) {
+  const rNum = Math.floor(Math.random() * fromThis);
+  return rNum;
+}
 
 // this is where a random category with a word is fetched from the server,
 // stored here

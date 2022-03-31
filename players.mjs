@@ -1,7 +1,9 @@
+import uuid from 'uuid-random';
+
 export let playersStats = [
-  { name: 'john', wins: 0, losses: 0 },
-  { name: 'chris', wins: 0, losses: 0 },
-  { name: 'justin', wins: 0, losses: 0 },
+  { name: 'john', id: uuid(), wins: 0, losses: 0 },
+  { name: 'chris', id: uuid(), wins: 0, losses: 0 },
+  { name: 'justin', id: uuid(), wins: 0, losses: 0 },
 ];
 
 export function checkPlayers(whoToCheck) {
@@ -16,6 +18,7 @@ export function checkPlayers(whoToCheck) {
 export function storePlayer(whoToAdd, winCount, lossCount) {
   const newStat = {
     name: whoToAdd,
+    id: uuid(),
     wins: winCount,
     losses: lossCount,
   };
