@@ -40,7 +40,6 @@ function getWord(req, res) {
 }
 
 function getGuesses(req, res) {
-  //res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   res.json(scoreCount.guesses);
 }
 
@@ -83,7 +82,10 @@ function addPlayer(req, res) {
 // get information from the server
 app.get('/category', getCategory);
 app.get('/category/:name', getWord);
-app.get('/guessCount', getGuesses);
+app.get('/guessCount', function(req, res) {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  getGuesses(req, res);
+});
 app.get('/getScore', getScore);
 
 // send information to the server
