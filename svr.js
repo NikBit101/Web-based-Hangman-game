@@ -81,7 +81,10 @@ app.get('/guessCount', getGuesses);
 app.get('/getScore', getScore);
 
 // send information to the server
-app.post('/sendScore', express.json(), sendScore);
+app.post('/sendScore', express.json(), function(req, res) {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
+  sendScore(req, res);
+});
 app.post('/playerName', express.json(), addPlayer);
 
 // the server listens to port 8080 for incoming connections from clients
