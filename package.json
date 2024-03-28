@@ -1,0 +1,15 @@
+{
+  "name": "hangman-web",
+  "version": "1.0.0",
+  "description": "This project is a web-based game, running on localhost express.js server in plain js",
+  "main": "index.mjs",
+  "type": "module",
+  "scripts": {
+    "start": "node svr.js"
+  },
+  "dependencies": {
+    "express": "^4.19.2",
+    "uuid": "^8.3.2",
+    "uuid-random": "^1.3.2"
+  }
+}

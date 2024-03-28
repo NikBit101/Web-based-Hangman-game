@@ -1,0 +1,242 @@
+
+/* In this root we define all main & custom variables that will be used as default colour, font-size etc */
+:root{
+    --main-col: #5e5eee;
+    --main-font: 'Courier New', Courier, monospace;
+    --org-fSize: 2em;
+    --maxWidth: 100%;
+}
+
+/* Here, the elements size and positions will be adjusted, based on maximum width of 600 pixels */
+@media screen and (max-width: 600px) {
+    *  main {
+    grid-template-rows: 3em 1fr 1fr 1fr;
+
+    grid-template-areas: "h1 h1 h1"
+    "game game game"
+    "canvas canvas canvas"
+    "keyboard keyboard keyboard";
+    }
+    
+    #head {
+        font-size: 3.2vw;
+    }
+}
+
+@media screen and (min-width: 450px) {
+    #game {
+        height: 70em;
+    }
+
+    #warningMsg {
+        left: 10em;
+    }
+}
+
+/* This asterisk symbol will set the whole web page to whatever parameter and value is in.
+In this case, margins and paddings will automatically be 0 once the page is loaded, as well as a default
+font and width limit set with the variables from root */
+* {
+    margin: 0;
+    padding: 0;
+    font-family: var(--main-font);
+    max-width: var(--maxWidth);
+}
+
+/* Here we put the 'main' tag from HTML as a grid and horizontally represent it with canvas, a head from above and 'keyboard' below it */
+main {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: 4em 1fr 1fr;
+
+    grid-template-areas: "head head head"
+      "canvas game game"
+      "canvas keyboard keyboard";
+
+    height: 100vh;
+    width: 100vw;
+}
+
+body {
+    background-color: rgb(33, 143, 194);
+    margin: 0;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+}
+
+#header{
+    grid-area: head;
+    position: relative;
+    background-color:rgba(40, 211, 154, 0.774);
+    color: #DFFF00;
+    border: 4px solid #8b9b26;
+    padding-top: 0.1em;
+    text-align: center;
+    font-size: 3em;
+}
+
+#game {
+    grid-area: game;
+    background-color: #D5F5E3;
+    text-align: center;
+    border: 6px solid var(--main-col);
+    height: 37em;
+}
+
+#yourword{
+    position: relative;
+    font-size: 3em;
+}
+
+#hiddenWord {
+    text-transform: uppercase;
+    margin: 0.7em;
+    font-size: var(--org-fSize);
+}
+
+canvas {
+    width: 100%;
+    height: 99%;
+    border: 4px solid var(--main-col);
+}
+
+#category {
+    text-transform: uppercase;
+    background-color: #CCCCFF;
+    font-size: var(--org-fSize);
+    text-align: center;
+}
+
+.inputTypes {
+    font-size: var(--org-fSize);
+}
+
+#keyboard {
+    grid-area: keyboard;
+    text-align: center;
+    display: inline-block;
+}
+
+.key{
+    margin: 0.1em;
+    background: white;
+    text-transform: uppercase;
+    padding: 0.8em 1.6em;
+    border-radius: 0.5em;
+    font-size: 1.3em;
+}
+
+.key:hover{
+    background-color: grey;
+    color: white;
+}
+.key:disabled{
+    background-color: grey;
+    border-color: grey;
+    color: white;
+}
+
+#letters_row1 button {
+    flex-basis: 10em;
+    flex-grow: 1;
+}
+
+#inputBox {
+    width: 4rem;
+    text-align: center;
+    font-size: 1em;
+    text-transform: uppercase;
+    border: solid;
+    border-color: rgb(83, 157, 243);
+    margin-bottom: 1rem;
+}
+
+#warningMsg{
+    background-color:rgb(48, 76, 117);
+    color: white;
+    font-size: 1.7em;
+    display: inline;
+}
+
+#errorMsg {
+    position: absolute;
+    background-color: rgb(240, 116, 116);
+    left: 6em;
+    top: 7em;
+    color: white;
+    font-size: 3em;
+    border: 3px solid black;
+}
+
+#guessCount{
+    text-align: center;
+    font-size: 2.5em;
+    color:aqua;
+    background-color: var(--main-col);
+}
+
+#scoreCount{
+    color: wheat;
+    background-color:var(--main-col);
+    max-width: 20%;
+    font-size: var(--org-fSize);
+    display: inline-block;
+}
+
+#usedLetters{
+    text-transform: uppercase;
+    color: white;
+    background-color: var(--main-col);
+    font-size: var(--org-fSize);
+    margin-bottom: 0.2em;
+}
+
+.promptButtons:hover{
+    background-color: grey;
+    color: white;
+}
+
+.promptButtons{
+    font-size: 50%;
+    padding: 3%;
+    margin: 2%;
+    border-radius: 0.5em;
+}
+
+.restartPrompt{
+    position: absolute;
+    text-transform: uppercase;
+    background-color: rgb(240, 116, 116);
+    max-width: 25%;
+    font-size: 4em;
+    top: 3.5em;
+    left: 5em;
+    border: 3px solid black;
+}
+
+.nameClass {
+    position: absolute;
+    text-transform: uppercase;
+    background-color: rgb(240, 116, 116);
+    max-width: 35%;
+    font-size: 3em;
+    top: 3.5em;
+    left: 5em;
+    border: 3px solid black;
+}
+#btnSend:hover{
+    background-color: grey;
+    color: white;
+}
+#btnSend{
+    font-style: var(--main-font);
+    font-size: 1em;
+    text-align: center;
+    margin: 1rem;
+    border-radius: 0.5em;
+}
+#nameInput{
+    max-width: 50%;
+    font-size: 1em;
+}
