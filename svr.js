@@ -66,6 +66,9 @@ function addPlayer(req, res) {
   if (isNewPlayer) {
     // if player's name doesn't exist in current list, add it
     addPlayerWithScore(payloadName, scoreCount.wins, scoreCount.losses);
+    // unique hash for score count
+    const hash = crypto.createHash('sha1').update(JSON.stringify(scoreCount)).digest('hex');
+    res.setHeader('ETag', hash);
     res.json(true);
   } else {
     // if the name already exists, warn player about it
