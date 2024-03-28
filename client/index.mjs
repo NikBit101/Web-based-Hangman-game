@@ -65,9 +65,9 @@ async function sendScore(scrW, scrL) {
   });
   if (response.ok) {
     const scoreCount = await response.json();
-    scoreCount.wins = scoreWins;
-    scoreCount.losses = scoreLosses;
-    handles.scoreCount.textContent = `Wins: ${scoreCount.wins}\nLosses: ${scoreCount.losses}`;
+    scoreWins = scoreCount.wins;
+    scoreLosses = scoreCount.losses;
+    handles.scoreCount.textContent = `Wins: ${scoreWins}\nLosses: ${scoreLosses}`;
   } else {
     // if the client couldn't send the score into server, display error message
     handles.scoreCount.textContent = ['*Could not load new score :-(*'];
