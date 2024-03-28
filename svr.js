@@ -12,6 +12,7 @@ import { scoreCount } from './scoreCount.mjs';
 
 // 'express' package is here for running the simple JavaScript server
 import express from 'express';
+import crypto from 'crypto';
 
 /**
  * create a simple server using 'express.json'
