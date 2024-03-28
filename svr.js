@@ -49,6 +49,7 @@ function getScore(req, res) {
 }
 
 function sendScore(req, res) {
+  res.setHeader('Cache-Control', 'no-cache, no-store, must-revalidate');
   // get the client score, update the score count list with it
   const payloadWins = req.body.wins;
   const payloadLosses = req.body.losses;
