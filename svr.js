@@ -56,6 +56,8 @@ function sendScore(req, res) {
   scoreCount.wins = payloadWins;
   scoreCount.losses = payloadLosses;
   // send back the information about the new score to the request
+  const hash = crypto.createHash('sha1').update(JSON.stringify(scoreCount)).digest('hex');
+  res.setHeader('ETag', hash);
   res.json(scoreCount);
 }
 
