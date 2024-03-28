@@ -327,6 +327,7 @@ async function displayScore() {
   const response = await fetch('getScore');
   if (response.ok) {
     const sCount = await response.json();
+    console.log(sCount);
     scoreWins = sCount.wins;
     scoreLosses = sCount.losses;
   } else {
