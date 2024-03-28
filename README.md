@@ -1,3 +1,5 @@
+The game is hosted on cyclic.sh and is available <a href="https://hangweb.cyclic.app" target="_blank">Here</a>
+
 # AppProgCwk
 
 # **[GitPushNumber]**
