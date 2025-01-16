@@ -20,6 +20,8 @@ import crypto from 'crypto';
  */
 const app = express();
 app.use(express.static('client'));
+app.use(express.json());
+
 
 // prepare category list variable on server
 const categories = prepareCategories();
