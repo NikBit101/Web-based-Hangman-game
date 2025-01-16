@@ -22,7 +22,6 @@ const app = express();
 app.use(express.static('client'));
 app.use(express.json());
 
-
 // prepare category list variable on server
 const categories = prepareCategories();
 
@@ -82,6 +81,9 @@ function addPlayer(req, res) {
 }
 
 // get information from the server
+app.get('/', (req, res) => {
+  res.sendFile('index.html', { root: 'client' });
+});
 app.get('/category', getCategory);
 app.get('/category/:name', getWord);
 app.get('/guessCount', function(req, res) {
