@@ -13,13 +13,20 @@ import { scoreCount } from './scoreCount.mjs';
 // 'express' package is here for running the simple JavaScript server
 import express from 'express';
 import crypto from 'crypto';
+import { fileURLToPath } from 'url';
+import { dirname } from 'path';
+import path from 'path';
+
 
 /**
  * create a simple server using 'express.json'
  * assign 'client' folder so that it is used as main client
  */
+// Derive the current directory path from the module's URL
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 const app = express();
-app.use(express.static('client'));
+app.use(express.static(path.join(__dirname, "client")));
 app.use(express.json());
 
 // prepare category list variable on server
@@ -80,10 +87,12 @@ function addPlayer(req, res) {
   }
 }
 
-// get information from the server
-app.get('/', (req, res) => {
-  res.sendFile('index.html', { root: 'client' });
+// Catch-all handler to serve `index.html`
+app.get("*", (req, res) => {
+  res.sendFile(path.join(__dirname, "client", "index.html"));
 });
+
+// get information from the server
 app.get('/category', getCategory);
 app.get('/category/:name', getWord);
 app.get('/guessCount', function(req, res) {
@@ -99,5 +108,5 @@ app.post('/sendScore', express.json(), function(req, res) {
 });
 app.post('/playerName', express.json(), addPlayer);
 
-// the server listens to port 8080 for incoming connections from clients
-app.listen(8080);
+const PORT = process.env.PORT || 3000;
+app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
