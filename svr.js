@@ -88,9 +88,9 @@ function addPlayer(req, res) {
 }
 
 // Catch-all handler to serve `index.html`
-app.get("*", (req, res) => {
+/*app.get("*", (req, res) => {
   res.sendFile(path.join(__dirname, "client", "index.html"));
-});
+});*/
 
 // get information from the server
 app.get('/category', getCategory);
